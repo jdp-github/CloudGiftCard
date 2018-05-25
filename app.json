@@ -1,0 +1,15 @@
+{
+    "pages": [
+        "pages/card/card",
+        "pages/index/index",
+        
+        "pages/history/history"
+    ],
+    "window": {
+        "backgroundColor": "#F6F6F6",
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#F6F6F6",
+        "navigationBarTitleText": "云礼卡",
+        "navigationBarTextStyle": "black"
+    }
+}

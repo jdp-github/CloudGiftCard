@@ -1,0 +1,61 @@
+<!--pages/card/card.wxml-->
+<view class='container root-contanier'>
+
+    <!-- 大图 -->
+    <view class='image-container'>
+        <image class='big-img image-container' mode='aspectFit' src='{{selectedImgUrl}}'></image>
+    </view>
+
+    <!-- 推荐 -->
+    <scroll-view scroll-x class='products-recommend-container'>
+        <image wx:for='{{recommendList}}' wx:key='{{recommendList.id}}' class='products-recommend-img' mode='aspectFit' id='{{item.id}}' src="{{item.isChecked?'../../images/7.png':item.imgUrl}}" bindtap='onImageClick' data-selectedImg='{{item.imgUrl}}'></image>
+    </scroll-view>
+
+    <view class='txt-title'>选择商品</view>
+
+    <!-- 列表 -->
+    <view class='products-container' wx:for='{{productList}}' wx:key='{{productList.id}}'>
+        <!-- item -->
+        <view class='products-item-container'>
+
+            <!-- 图片  -->
+            <image class='products-item-img' mode='aspectFit' src='{{item.imgUrl}}'></image>
+
+            <!-- 文字  -->
+            <view class='products-item-txt'>
+                <view>{{item.name}}</view>
+                <view class='products-item-txt-below'>¥{{item.price}}</view>
+            </view>
+
+            <!-- 按钮  -->
+            <view class='products-item-icon-container'>
+                <view id='{{item.id}}' class="products-item-icon fa fa-plus-square-o" aria-hidden="true" hidden='{{item.hidden}}' bindtap='showCount'></view>
+                <!-- 隐藏 -->
+                <view class='products-item-hidden-container' hidden='{{!item.hidden}}'>
+                    <view id='{{item.id}}' class='products-item-icon fa fa-minus-square-o' type='info' bindtap='minusCount'></view>
+                    <input id='{{item.id}}' class='products-item-input' bindblur='onFocusChange' type='number' maxlength='2' value='{{item.count}}'></input>
+                    <view id='{{item.id}}' class="products-item-icon-color products-item-icon fa fa-plus-square-o" type='success' color='#00f' bindtap='addCount'></view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 分割线 -->
+        <view class='products-item-line'></view>
+    </view>
+
+    <!-- footer -->
+    <view class='footer-container'>
+        <!-- 分割线 -->
+        <view style=' height: 1rpx;width: 100%; background: #e9ecee;'></view>
+        <!-- 底部项 -->
+        <view class='footer-item-contanier'>
+            <!-- 左边文字 -->
+            <view class='footer-left'>
+                <view style='color:#7C7C7C;font-size:30rpx'>{{productCount}}份礼品</view>
+                <view>¥{{totalPrice}}</view>
+            </view>
+            <!-- 按钮 -->
+            <button class='purchase-btn' disabled='{{!canBuy}}'>购买</button>
+        </view>
+    </view>
+</view>
