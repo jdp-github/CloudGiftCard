@@ -1,8 +1,7 @@
 {
     "pages": [
-        "pages/card/card",
         "pages/index/index",
-        
+        "pages/card/card",
         "pages/history/history"
     ],
     "window": {
