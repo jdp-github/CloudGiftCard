@@ -3,15 +3,21 @@
 
     <!-- 大图 -->
     <view class='image-container'>
-        <image class='big-img image-container' mode='aspectFit' src='{{selectedImgUrl}}'></image>
+        <image class='big-img' mode='aspectFit' src='{{selectedImgUrl}}'></image>
     </view>
 
     <!-- 推荐 -->
     <scroll-view scroll-x class='products-recommend-container'>
-        <image wx:for='{{recommendList}}' wx:key='{{recommendList.id}}' class='products-recommend-img' mode='aspectFit' id='{{item.id}}' src="{{item.isChecked?'../../images/7.png':item.imgUrl}}" bindtap='onImageClick' data-selectedImg='{{item.imgUrl}}'></image>
+        <view  wx:for='{{recommendList}}' wx:key='{{recommendList.id}}' class="{{item.isChecked?'products-recommend-img-container-check':'products-recommend-img-container-normal'}}">
+            <image class='products-recommend-img' id='{{item.id}}' mode='aspectFit' src="{{item.imgUrl}}" bindtap='onImageClick' data-selectedImg='{{item.imgUrl}}'>
+            </image>
+            <view hidden='{{!item.isChecked}}' style="position:absolute;right:0rpx;top:-2rpx;" class="products-recommend-check fa fa-check-square"></view>
+        </view>
     </scroll-view>
 
-    <view class='txt-title'>选择商品</view>
+    <view class='txt-title-container'>
+        <view class='txt-title'>选择商品</view>
+    </view>
 
     <!-- 列表 -->
     <view class='products-container' wx:for='{{productList}}' wx:key='{{productList.id}}'>
@@ -19,7 +25,7 @@
         <view class='products-item-container'>
 
             <!-- 图片  -->
-            <image class='products-item-img' mode='aspectFit' src='{{item.imgUrl}}'></image>
+            <image class='products-item-img' mode='aspectFit' src='{{item.imgUrl}}' bindtap='onItemClick' data-item='{{item}}'></image>
 
             <!-- 文字  -->
             <view class='products-item-txt'>
@@ -56,6 +62,23 @@
             </view>
             <!-- 按钮 -->
             <button class='purchase-btn' disabled='{{!canBuy}}'>购买</button>
+        </view>
+    </view>
+
+    <!-- 弹出框 -->
+    <view class='mask' wx:if="{{showDialog}}" bindtap='onMaskClick'></view>
+    <view class='dialog-container' animation="{{animationData}}" wx:if="{{showDialog}}">
+        <!-- avatar -->
+        <view class='dialog-title-container'>
+            <image class='dialog-img' mode='aspectFill' src='{{clickItem.imgUrl}}'></image>
+            <view class='dialog-title'>{{clickItem.name}}</view>
+            <view class='dialog-price'>¥{{clickItem.price}}</view>
+        </view>
+        <!-- 内容 -->
+        <view class='dialog-content-contanier'>
+            <scroll-view class='dialog-content-scroll-view' scroll-y>
+                <image class='dialog-long-img' mode='aspectFit'></image>
+            </scroll-view>
         </view>
     </view>
 </view>

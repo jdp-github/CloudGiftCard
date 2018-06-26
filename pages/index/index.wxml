@@ -1,108 +1,30 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="page-section page-section-spacing swiper">
-    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}" interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
-      <block wx:for="{{imgSrc}}" wx:key="*this">
-        <swiper-item>
-          <view class="swiper-item {{item}}" bindtap="navigate" data-id="1">
-            <image mode="{{item.mode}}" src="{{item}}"></image>
-          </view>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <view class="second-section-title">
-    咖啡+祝福 即刻表心意
-  </view>
-  <view class="block-row">
-    <view class="block-item">
-      <view class="block-frame">
-        <view class="block-img" bindtap="navigate" data-id="2" data-text="冰沁心甜夏天见">
-          <image class="block-img-src" mode="" src="{{blockImg1}}"></image>
-        </view>
-        <view class="block-text">
-          冰沁心甜夏天见
-        </view>
-      </view>
+    <view class="page-section page-section-spacing swiper">
+        <swiper interval="{{interval}}" duration="{{duration}}" indicator-dots>
+            <block wx:for="{{imgSrc}}" wx:key="*this">
+                <swiper-item>
+                    <view class="swiper-item {{item}}" bindtap="navigate" data-id="1">
+                        <image mode="{{item.mode}}" src="{{item}}"></image>
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
     </view>
-    <view class="block-item">
-      <view class="block-frame">
-        <view class="block-img" bindtap="navigate" data-id="3" data-text="妈妈，我想对你说">
-          <image class="block-img-src" mode="" src="{{blockImg2}}"></image>
-        </view>
-        <view class="block-text">
-          妈妈，我想对你说
-        </view>
-      </view>
+    <view class="second-section-title">
+        咖啡+祝福 即刻表心意
     </view>
-  </view>
-  <view class="block-row-second">
-    <view class="block-item">
-      <view class="block-frame">
-        <view class="block-img" bindtap="navigate" data-id="4" data-text="勇敢爱">
-          <image class="block-img-src" mode="" src="{{blockImg3}}"></image>
+
+    <view class="block-row" wx:for="{{dataList}}" wx:key="{{dataList.id}}">
+        <view class="block-item" wx:for="{{item}}" wx:key="{{item.id}}">
+            <view class="block-frame">
+                <view class="block-img" bindtap="navigate" data-id="{{item.id}}" data-text="{{item.text}}">
+                    <image class="block-img-src" mode="" src="{{item.imgUrl}}"></image>
+                </view>
+                <view class="block-text">
+                    {{item.text}}
+                </view>
+            </view>
         </view>
-        <view class="block-text">
-          勇敢爱
-        </view>
-      </view>
     </view>
-    <view class="block-item">
-      <view class="block-frame">
-        <view class="block-img" bindtap="navigate" data-id="5" data-text="告白记">
-          <image class="block-img-src" mode="" src="{{blockImg4}}"></image>
-        </view>
-        <view class="block-text">
-          告白记
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class="block-row-second">
-    <view class="block-item">
-      <view class="block-frame">
-        <view class="block-img" bindtap="navigate" data-id="6" data-text="加油">
-          <image class="block-img-src" mode="" src="{{blockImg5}}"></image>
-        </view>
-        <view class="block-text">
-          加油
-        </view>
-      </view>
-    </view>
-    <view class="block-item">
-      <view class="block-frame">
-        <view class="block-img" bindtap="navigate" data-id="7" data-text="轻松片刻">
-          <image class="block-img-src" mode="" src="{{blockImg6}}"></image>
-        </view>
-        <view class="block-text">
-          轻松片刻
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class="block-row-second">
-    <view class="block-item">
-      <view class="block-frame">
-        <view class="block-img" bindtap="navigate" data-id="8" data-text="有你真好">
-          <image class="block-img-src" mode="" src="{{blockImg7}}"></image>
-        </view>
-        <view class="block-text">
-          有你真好
-        </view>
-      </view>
-    </view>
-    <view class="block-item">
-      <view class="block-frame">
-        <view class="block-img" bindtap="navigate" data-id="9" data-text="生快">
-          <image class="block-img-src" mode="" src="{{blockImg8}}"></image>
-        </view>
-        <view class="block-text">
-          生快
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class="shop-history">
-    <text class="fa fa-history"> 购买历史</text>
-  </view>
 </view>

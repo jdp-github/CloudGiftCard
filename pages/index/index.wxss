@@ -112,15 +112,8 @@ image {
     flex-direction: row;
     padding-left: 15rpx;
     padding-right: 15rpx;
-    margin-top: 15rpx;
-}
-
-.block-row-second {
-    display: flex;
-    flex-direction: row;
-    padding-left: 15rpx;
-    padding-right: 15rpx;
-    margin-top: 30rpx;
+    margin-top: 25rpx;
+    margin-bottom: 25rpx;
 }
 
 .block-item {
@@ -150,12 +143,4 @@ image {
     font-size: 12px;
     color: #999;
     text-align: center;
-}
-
-.shop-history {
-    font-size: 22rpx;
-    color: #66c;
-    margin-top: 30rpx;
-    text-align: center;
-    padding-bottom: 15rpx;
 }

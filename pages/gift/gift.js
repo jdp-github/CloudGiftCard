@@ -12,11 +12,14 @@ Page({
         totalPrice: 0,
         canBuy: false,
 
+        showDialog: false,
+        clickItem: {},
+
         recommendList: [
             {
                 id: 1,
                 imgUrl: '../../images/1.jpg',
-                isChecked: false
+                isChecked: true
             },
             {
                 id: 2,
@@ -108,6 +111,41 @@ Page({
         this.setData({
             selectedImgUrl: imgUrl,
             recommendList: this.data.recommendList
+        })
+    },
+
+    onItemClick: function (e) {
+        this.setData({
+           clickItem: e.target.dataset.item
+        })
+
+        var animation = wx.createAnimation({
+            duration: 200,
+            timingFunction: "linear",
+            delay: 0
+        })
+
+        this.animation = animation
+        animation.opacity(0).translateY(wx.getSystemInfoSync().windowHeight).step()
+        this.setData({
+            animationData: animation.export()
+        })
+
+        setTimeout(function () {
+            animation.opacity(1).translateY(200).step();
+            this.setData({
+                animationData: animation
+            })
+        }.bind(this), 50)
+
+        this.setData({
+            showDialog: true
+        })
+    },
+
+    onMaskClick: function (e) {
+        this.setData({
+            showDialog: false
         })
     },
 
@@ -208,7 +246,7 @@ Page({
         })
         var text = util.getTextFromSrcPage(this.data.srcPage)
         if (text === 'undefined') {
-          text = '星巴克用星说'
+            text = '星巴克用星说'
         }
         wx.setNavigationBarTitle({
             title: text
