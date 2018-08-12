@@ -15,14 +15,14 @@
         咖啡+祝福 即刻表心意
     </view>
 
-    <view class="block-row" wx:for="{{dataList}}" wx:key="{{dataList.id}}">
-        <view class="block-item" wx:for="{{item}}" wx:key="{{item.id}}">
+    <view class="block-row" wx:for="{{dataList}}" wx:key="{{item.metadata.uid}}">
+        <view class="block-item" wx:for="{{item}}" wx:key="{{item.metadata.uid}}">
             <view class="block-frame">
-                <view class="block-img" bindtap="navigate" data-id="{{item.id}}" data-text="{{item.text}}">
-                    <image class="block-img-src" mode="" src="{{item.imgUrl}}"></image>
+                <view class="block-img" bindtap="navigate" data-id="{{item.metadata.uid}}" data-text="{{item.metadata.description}}">
+                    <image class="block-img-src" mode="" src="{{item.spec.logo}}"></image>
                 </view>
                 <view class="block-text">
-                    {{item.text}}
+                    {{item.metadata.description}}
                 </view>
             </view>
         </view>

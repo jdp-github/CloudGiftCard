@@ -49,5 +49,5 @@ module.exports = {
   formatTime: formatTime,
   getCurrentPageUrl: getCurrentPageUrl,
   getCurrentPageUrlWithArgs: getCurrentPageUrlWithArgs,
-  getTextFromSrcPage: getTextFromSrcPage
+  getTextFromSrcPage: getTextFromSrcPage,
 }
