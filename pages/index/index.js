@@ -9,79 +9,79 @@ Page({
     interval: 5000,
     duration: 500,
     imgSrc: [],
-    dataList:[]
-    // dataList: [
-    //   [
-    //     {
-    //       id: 0,
-    //       imgUrl: '../../images/1.jpg',
-    //       text: "冰沁心甜夏天见"
-    //     },
-    //     {
-    //       id: 1,
-    //       imgUrl: '../../images/2.jpg',
-    //       text: "妈妈，我想对你说"
-    //     }
-    //   ],
-    //   [
-    //     {
-    //       id: 2,
-    //       imgUrl: '../../images/3.jpg',
-    //       text: "哈哈哈"
-    //     },
-    //     {
-    //       id: 3,
-    //       imgUrl: '../../images/4.jpg',
-    //       text: "呵呵呵呵"
-    //     }
-    //   ],
-    //   [
-    //     {
-    //       id: 4,
-    //       imgUrl: '../../images/5.jpg',
-    //       text: "4444444"
-    //     },
-    //     {
-    //       id: 5,
-    //       imgUrl: '../../images/1.jpg',
-    //       text: "5555555"
-    //     }
-    //   ],
-    //   [
-    //     {
-    //       id: 6,
-    //       imgUrl: '../../images/5.jpg',
-    //       text: "6666"
-    //     },
-    //     {
-    //       id: 7,
-    //       imgUrl: '../../images/1.jpg',
-    //       text: "77777"
-    //     }
-    //   ],
-    // ],
+    // dataList:[]
+    dataList: [
+      [
+        {
+          id: 0,
+          imgUrl: '../../images/1.jpg',
+          text: "冰沁心甜夏天见"
+        },
+        {
+          id: 1,
+          imgUrl: '../../images/2.jpg',
+          text: "妈妈，我想对你说"
+        }
+      ],
+      [
+        {
+          id: 2,
+          imgUrl: '../../images/3.jpg',
+          text: "哈哈哈"
+        },
+        {
+          id: 3,
+          imgUrl: '../../images/4.jpg',
+          text: "呵呵呵呵"
+        }
+      ],
+      [
+        {
+          id: 4,
+          imgUrl: '../../images/5.jpg',
+          text: "4444444"
+        },
+        {
+          id: 5,
+          imgUrl: '../../images/1.jpg',
+          text: "5555555"
+        }
+      ],
+      [
+        {
+          id: 6,
+          imgUrl: '../../images/5.jpg',
+          text: "6666"
+        },
+        {
+          id: 7,
+          imgUrl: '../../images/1.jpg',
+          text: "77777"
+        }
+      ],
+    ],
   },
 
   onLoad: function() {
     var self = this;
-    wx.request({
-      url: 'https://www.lytall.com/v1/goods', //仅为示例，并非真实的接口地址
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function(res) {
-        var resObj = JSON.parse(res.data.data);
-        var dataList = [];
-        for (var i = 0, len = resObj.kvs.length; i < len; i++) {
-          var itemObj = resObj.kvs[i];
-          console.log(base64.decode(itemObj.value))
-          dataList[i] = JSON.parse(base64.decode(itemObj.value));
-        }
-        self.setData({
-          dataList: self.data.dataList
-        })
-      }
-    })
+    // wx.request({
+    //   url: 'https://www.lytall.com/v1/goods',
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success: function(res) {
+    //     var resObj = JSON.parse(res.data.data);
+    //     var dataList = [];
+    //     for (var i = 0, len = resObj.kvs.length; i < len; i++) {
+    //       var itemObj = resObj.kvs[i];
+    //       console.log(base64.decode(itemObj.value))
+    //       dataList[i] = JSON.parse(base64.decode(itemObj.value));
+    //     }
+    //     self.setData({
+    //       dataList: self.data.dataList
+    //     })
+    //   }
+    // })
   },
 
   changeProperty: function(e) {

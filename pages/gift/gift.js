@@ -1,5 +1,6 @@
 // pages/card/card.js
 const util = require('../../utils/util.js')
+var base64 = require('../../utils/base64.js');
 
 Page({
     /**
@@ -15,8 +16,7 @@ Page({
         showDialog: false,
         clickItem: {},
 
-        recommendList: [
-            {
+        recommendList: [{
                 id: 1,
                 imgUrl: '../../images/1.jpg',
                 isChecked: true
@@ -42,61 +42,97 @@ Page({
                 isChecked: false
             },
         ],
-
-        productList:
-        [
-            {
-                id: 1,
-                imgUrl: '../../images/1.jpg',
-                name: '当即特饮',
-                price: 40,
-                count: 1,
-                hidden: false
-            },
-            {
-                id: 2,
-                imgUrl: '../../images/2.jpg',
-                name: '焦糖玛奇朵',
-                price: 39,
-                count: 1,
-                hidden: false
-            },
-            {
-                id: 3,
-                imgUrl: '../../images/3.jpg',
-                name: '美式咖啡',
-                price: 35,
-                count: 1,
-                hidden: false
-            },
-            {
-                id: 4,
-                imgUrl: '../../images/1.jpg',
-                name: '摩卡',
-                price: 27,
-                count: 1,
-                hidden: false
-            },
-            {
-                id: 5,
-                imgUrl: '../../images/2.jpg',
-                name: '冷萃冰咖啡',
-                price: 36,
-                count: 1,
-                hidden: false
-            },
-            {
-                id: 6,
-                imgUrl: '../../images/3.jpg',
-                name: '拿铁',
-                price: 31,
-                count: 1,
-                hidden: false
-            },
-        ]
+        productList: []
+        // productList: [{
+        //         id: 1,
+        //         imgUrl: '../../images/1.jpg',
+        //         name: '当即特饮',
+        //         price: 40,
+        //         count: 1,
+        //         hidden: false
+        //     },
+        //     {
+        //         id: 2,
+        //         imgUrl: '../../images/2.jpg',
+        //         name: '焦糖玛奇朵',
+        //         price: 39,
+        //         count: 1,
+        //         hidden: false
+        //     },
+        //     {
+        //         id: 3,
+        //         imgUrl: '../../images/3.jpg',
+        //         name: '美式咖啡',
+        //         price: 35,
+        //         count: 1,
+        //         hidden: false
+        //     },
+        //     {
+        //         id: 4,
+        //         imgUrl: '../../images/1.jpg',
+        //         name: '摩卡',
+        //         price: 27,
+        //         count: 1,
+        //         hidden: false
+        //     },
+        //     {
+        //         id: 5,
+        //         imgUrl: '../../images/2.jpg',
+        //         name: '冷萃冰咖啡',
+        //         price: 36,
+        //         count: 1,
+        //         hidden: false
+        //     },
+        //     {
+        //         id: 6,
+        //         imgUrl: '../../images/3.jpg',
+        //         name: '拿铁',
+        //         price: 31,
+        //         count: 1,
+        //         hidden: false
+        //     },
+        // ]
     },
 
-    onImageClick: function (e) {
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function(options) {
+        this.setData({
+            srcPage: util.getCurrentPageUrlWithArgs()
+        })
+        var text = util.getTextFromSrcPage(this.data.srcPage)
+        if (text === 'undefined') {
+            text = '星巴克用星说'
+        }
+        wx.setNavigationBarTitle({
+            title: text
+        })
+
+        var self = this;
+        wx.request({
+            url: 'https://www.lytall.com/v1/goods',
+            header: {
+                'content-type': 'application/json' // 默认值
+            },
+            success: function(res) {
+                var resObj = JSON.parse(res.data.data);
+                for (var i = 0, len = resObj.kvs.length; i < len; i++) {
+                    var itemObj = resObj.kvs[i];
+                    // console.log(base64.decode(itemObj.value))
+                    self.data.productList[i] = JSON.parse(base64.decode(itemObj.value));
+                }
+                self.setData({
+                    productList: self.data.productList
+                })
+
+                // console.log(productList)
+                console.log(self.data.productList)
+            }
+        })
+    },
+
+    onImageClick: function(e) {
         var target = e.target
         var imgUrl = target.dataset.selectedimg
 
@@ -114,9 +150,9 @@ Page({
         })
     },
 
-    onItemClick: function (e) {
+    onItemClick: function(e) {
         this.setData({
-           clickItem: e.target.dataset.item
+            clickItem: e.target.dataset.item
         })
 
         var animation = wx.createAnimation({
@@ -131,7 +167,7 @@ Page({
             animationData: animation.export()
         })
 
-        setTimeout(function () {
+        setTimeout(function() {
             animation.opacity(1).translateY(200).step();
             this.setData({
                 animationData: animation
@@ -143,13 +179,13 @@ Page({
         })
     },
 
-    onMaskClick: function (e) {
+    onMaskClick: function(e) {
         this.setData({
             showDialog: false
         })
     },
 
-    showCount: function (e) {
+    showCount: function(e) {
         // console.log(e)
         var index = e.target.id;
         var item = this.data.productList[index - 1];
@@ -166,7 +202,7 @@ Page({
         })
     },
 
-    addCount: function (e) {
+    addCount: function(e) {
         // console.log(e)
         var index = e.target.id;
         var item = this.data.productList[index - 1];
@@ -182,11 +218,11 @@ Page({
         })
     },
 
-    minusCount: function (e) {
+    minusCount: function(e) {
         var index = e.target.id;
         var item = this.data.productList[index - 1]
 
-        --item.count;
+            --item.count;
         --this.data.productCount;
         this.data.totalPrice -= item.price;
 
@@ -206,7 +242,7 @@ Page({
         })
     },
 
-    onFocusChange: function (e) {
+    onFocusChange: function(e) {
         var item = this.data.productList[e.target.id - 1];
 
         this.data.productCount -= item.count;
@@ -237,68 +273,53 @@ Page({
         })
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-        this.setData({
-            srcPage: util.getCurrentPageUrlWithArgs()
-        })
-        var text = util.getTextFromSrcPage(this.data.srcPage)
-        if (text === 'undefined') {
-            text = '星巴克用星说'
-        }
-        wx.setNavigationBarTitle({
-            title: text
-        })
-    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     }
 })

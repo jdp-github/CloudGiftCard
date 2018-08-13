@@ -20,17 +20,17 @@
     </view>
 
     <!-- 列表 -->
-    <view class='products-container' wx:for='{{productList}}' wx:key='{{productList.id}}'>
+    <view class='products-container' wx:for='{{productList}}' wx:key='{{item.metadata.uid}}'>
         <!-- item -->
         <view class='products-item-container'>
 
             <!-- 图片  -->
-            <image class='products-item-img' mode='aspectFit' src='{{item.imgUrl}}' bindtap='onItemClick' data-item='{{item}}'></image>
+            <image class='products-item-img' mode='aspectFit' src='{{item.spec.logo}}' bindtap='onItemClick' data-item='{{item}}'></image>
 
             <!-- 文字  -->
             <view class='products-item-txt'>
-                <view>{{item.name}}</view>
-                <view class='products-item-txt-below'>¥{{item.price}}</view>
+                <view>{{item.metadata.description}}</view>
+                <view class='products-item-txt-below'>¥{{item.spec.price}}</view>
             </view>
 
             <!-- 按钮  -->

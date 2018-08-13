@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.98",
+	"libVersion": "2.2.2",
 	"appid": "wx1a597e61cecd1a6f",
 	"projectname": "Lytall",
 	"isGameTourist": false,
