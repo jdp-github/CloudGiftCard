@@ -121,6 +121,7 @@ Page({
                     var itemObj = resObj.kvs[i];
                     // console.log(base64.decode(itemObj.value))
                     self.data.productList[i] = JSON.parse(base64.decode(itemObj.value));
+                    self.data.productList[i].index = i;
                 }
                 self.setData({
                     productList: self.data.productList
@@ -186,13 +187,13 @@ Page({
     },
 
     showCount: function(e) {
-        // console.log(e)
+        console.log(e)
         var index = e.target.id;
-        var item = this.data.productList[index - 1];
-
-        item.hidden = !item.hidden;
+        var item = this.data.productList[index];
+        // console.log(index)
+        item.spec.hidden = !item.spec.hidden;
         ++this.data.productCount;
-        this.data.totalPrice += item.price;
+        this.data.totalPrice += item.spec.price;
 
         this.setData({
             productList: this.data.productList,
@@ -205,11 +206,11 @@ Page({
     addCount: function(e) {
         // console.log(e)
         var index = e.target.id;
-        var item = this.data.productList[index - 1];
+        var item = this.data.productList[index];
 
-        ++item.count;
+        ++item.spec.count;
         ++this.data.productCount;
-        this.data.totalPrice += item.price;
+        this.data.totalPrice += item.spec.price;
 
         this.setData({
             productList: this.data.productList,
@@ -220,15 +221,15 @@ Page({
 
     minusCount: function(e) {
         var index = e.target.id;
-        var item = this.data.productList[index - 1]
+        var item = this.data.productList[index];
 
-            --item.count;
+        --item.spec.count;
         --this.data.productCount;
-        this.data.totalPrice -= item.price;
+        this.data.totalPrice -= item.spec.price;
 
-        if (item.count == 0) {
-            item.count = 1
-            item.hidden = !item.hidden
+        if (item.spec.count == 0) {
+            item.spec.count = 1
+            item.spec.hidden = !item.spec.hidden
         }
         if (this.data.productCount == 0) {
             this.data.canBuy = false;
@@ -243,23 +244,23 @@ Page({
     },
 
     onFocusChange: function(e) {
-        var item = this.data.productList[e.target.id - 1];
+        var item = this.data.productList[e.target.id];
 
-        this.data.productCount -= item.count;
-        this.data.totalPrice -= item.count * item.price;
+        this.data.productCount -= item.spec.count;
+        this.data.totalPrice -= item.spec.count * item.spec.price;
 
         if (e.detail.value == null || e.detail.value == '') {
             e.detail.value = 0;
         }
 
-        item.count = parseInt(e.detail.value);
+        item.spec.count = parseInt(e.detail.value);
 
-        this.data.productCount += item.count;
-        this.data.totalPrice += item.count * item.price;
+        this.data.productCount += item.spec.count;
+        this.data.totalPrice += item.spec.count * item.spec.price;
 
         if (this.data.productCount <= 0) {
-            item.count = 1;
-            item.hidden = false;
+            item.spec.count = 1;
+            item.spec.hidden = false;
             this.data.productCount = 0;
             this.data.totalPrice = 0;
             this.data.canBuy = false;
@@ -272,7 +273,6 @@ Page({
             canBuy: this.data.canBuy
         })
     },
-
 
     /**
      * 生命周期函数--监听页面初次渲染完成

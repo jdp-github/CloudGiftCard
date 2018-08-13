@@ -20,7 +20,7 @@
     </view>
 
     <!-- 列表 -->
-    <view class='products-container' wx:for='{{productList}}' wx:key='{{item.metadata.uid}}'>
+    <view class='products-container' wx:for='{{productList}}' wx:key='{{item.index}}'>
         <!-- item -->
         <view class='products-item-container'>
 
@@ -35,12 +35,12 @@
 
             <!-- 按钮  -->
             <view class='products-item-icon-container'>
-                <view id='{{item.id}}' class="products-item-icon fa fa-plus-square-o" aria-hidden="true" hidden='{{item.hidden}}' bindtap='showCount'></view>
+                <view id='{{item.index}}' class="products-item-icon fa fa-plus-square-o" aria-hidden="true" hidden='{{item.spec.hidden}}' bindtap='showCount'></view>
                 <!-- 隐藏 -->
-                <view class='products-item-hidden-container' hidden='{{!item.hidden}}'>
-                    <view id='{{item.id}}' class='products-item-icon fa fa-minus-square-o' type='info' bindtap='minusCount'></view>
-                    <input id='{{item.id}}' class='products-item-input' bindblur='onFocusChange' type='number' maxlength='2' value='{{item.count}}'></input>
-                    <view id='{{item.id}}' class="products-item-icon-color products-item-icon fa fa-plus-square-o" type='success' color='#00f' bindtap='addCount'></view>
+                <view class='products-item-hidden-container' hidden='{{!item.spec.hidden}}'>
+                    <view id='{{item.index}}' class='products-item-icon fa fa-minus-square-o' type='info' bindtap='minusCount'></view>
+                    <input id='{{item.index}}' class='products-item-input' bindblur='onFocusChange' type='number' maxlength='2' value='{{item.spec.count}}'></input>
+                    <view id='{{item.index}}' class="products-item-icon-color products-item-icon fa fa-plus-square-o" type='success' color='#00f' bindtap='addCount'></view>
                 </view>
             </view>
         </view>
