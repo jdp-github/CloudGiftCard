@@ -8,8 +8,8 @@
 
     <!-- 推荐 -->
     <scroll-view scroll-x class='products-recommend-container'>
-        <view  wx:for='{{recommendList}}' wx:key='{{recommendList.id}}' class="{{item.isChecked?'products-recommend-img-container-check':'products-recommend-img-container-normal'}}">
-            <image class='products-recommend-img' id='{{item.id}}' mode='aspectFit' src="{{item.imgUrl}}" bindtap='onImageClick' data-selectedImg='{{item.imgUrl}}'>
+        <view wx:for='{{cardList}}' wx:key='{{item.index}}' class="{{item.isChecked?'products-recommend-img-container-check':'products-recommend-img-container-normal'}}">
+            <image class='products-recommend-img' id='{{item.index}}' mode='aspectFit' src="{{item.spec.logo}}" bindtap='onImageClick' data-selectedImg='{{item.spec.logo}}'>
             </image>
             <view hidden='{{!item.isChecked}}' style="position:absolute;right:0rpx;top:-2rpx;" class="products-recommend-check fa fa-check-square"></view>
         </view>

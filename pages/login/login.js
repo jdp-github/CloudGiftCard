@@ -1,6 +1,5 @@
 // pages/login/login.js
 var util = require('../../utils/util.js');
-// var md5 = require('../../utils/md5.js');
 var minMD5 = require('../../utils/minMD5.js');
 
 Page({
@@ -9,34 +8,32 @@ Page({
      * 页面的初始数据
      */
     data: {
-        canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        // out_trade_no: '1qaz2WSX3edc4RFV5tgb6yhn7ujm8IKL'
+        canIUse: wx.canIUse('button.open-type.getUserInfo')
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        // wx.getSetting({
-        //   success: function(res) {
-        //     if (res.authSetting['scope.userInfo']) {
-        //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-        //       wx.getUserInfo({
-        //         success: function(res) {
-        //           wx.switchTab({
-        //             url: '../index/index'
-        //           })
-        //         }
-        //       })
-        //     }
-        //   }
-        // })
+        wx.getSetting({
+            success: function(res) {
+                if (res.authSetting['scope.userInfo']) {
+                    // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+                    // wx.getUserInfo({
+                    //     success: function(res) {
+                    //         wx.switchTab({
+                    //             url: '../index/index'
+                    //         })
+                    //     }
+                    // })
+                }
+            }
+        })
     },
 
     bindGetUserInfo: function(e) {
-        // console.log(e)
         // wx.switchTab({
-        //   url: '../index/index'
+        //     url: '../index/index'
         // })
         var that = this;
         wx.login({
@@ -44,14 +41,27 @@ Page({
                 // console.log(res.code)
                 //获取openid
                 that.getOpenId(res.code)
+                // that.test(res.code)
             }
         });
     },
+
+    // test: function(code) {
+    //     var uuu = 'https://www.lytall.com/v1/wxopenid/' + code
+    //     console.log(uuu)
+    //     wx.request({
+    //         url: uuu,
+    //         success: function(res) {
+    //             console.log(JSON.parse(res.data.data).openid)
+    //         }
+    //     })
+    // },
+
     /* 获取openId */
     getOpenId: function(code) {
         var that = this
         wx.request({
-            url: "https://api.weixin.qq.com/sns/jscode2session?appid=wx1a597e61cecd1a6f&secret=1287c5c5defc340a0d1021e4daba22c8&js_code=" + code + "&grant_type=authorization_code",
+            url: "https://www.lytall.com/v1/wxopenid/" + code,
             method: 'GET',
             success: function(res) {
                 //统一支付签名
@@ -64,10 +74,13 @@ Page({
                 var out_trade_no = that.getWxPayOrdrID(); // 商户订单号
                 var spbill_create_ip = '127.0.0.0'; //ip
                 // var total_fee = parseInt(that.data.wxPayMoney) * 100;
-                var total_fee = 10;
+                var total_fee = 1;
                 var trade_type = "JSAPI";
                 var key = 'xiAofAnguAnApimiyAo18lidAo18guAn';
-                var unifiedPayment = 'appid=' + appid + '&body=' + body + '&mch_id=' + mch_id + '&nonce_str=' + nonce_str + '&notify_url=' + notify_url + '&openid=' + res.data.openid + '&out_trade_no=' + out_trade_no + '&sign_type=MD5&spbill_create_ip=' + spbill_create_ip + '&total_fee=' + total_fee + '&trade_type=' + trade_type + '&key=' + key
+                // debugger
+                var openid = JSON.parse(res.data.data).openid;
+                console.log(openid);
+                var unifiedPayment = 'appid=' + appid + '&body=' + body + '&mch_id=' + mch_id + '&nonce_str=' + nonce_str + '&notify_url=' + notify_url + '&openid=' + openid + '&out_trade_no=' + out_trade_no + '&sign_type=MD5&spbill_create_ip=' + spbill_create_ip + '&total_fee=' + total_fee + '&trade_type=' + trade_type + '&key=' + key
                 //   debugger
                 var sign = minMD5(unifiedPayment).toUpperCase()
                 // console.log(unifiedPayment)
@@ -79,7 +92,7 @@ Page({
                 formData += "<mch_id>" + mch_id + "</mch_id>"
                 formData += "<nonce_str>" + nonce_str + "</nonce_str>"
                 formData += "<notify_url>" + notify_url + "</notify_url>"
-                formData += "<openid>" + res.data.openid + "</openid>"
+                formData += "<openid>" + openid + "</openid>"
                 formData += "<out_trade_no>" + out_trade_no + "</out_trade_no>"
                 formData += "<sign_type>" + "MD5" + "</sign_type>"
                 formData += "<spbill_create_ip>" + spbill_create_ip + "</spbill_create_ip>"
@@ -87,7 +100,7 @@ Page({
                 formData += "<trade_type>" + trade_type + "</trade_type>"
                 formData += "<sign>" + sign + "</sign>"
                 formData += "</xml>"
-                // console.log(formData)
+                console.log(formData)
 
                 //统一支付
                 wx.request({
@@ -96,7 +109,7 @@ Page({
                     head: 'application/x-www-form-urlencoded',
                     data: formData, // 设置请求的 header
                     success: function(res) {
-                        // console.log(res)
+                        console.log(res)
                         // debugger
                         var result_code = that.getXMLNodeValue('result_code', res.data.toString("utf-8"))
                         var resultCode = result_code.split('[')[2].split(']')[0]
@@ -125,7 +138,7 @@ Page({
                             var timeStamp = that.createTimeStamp();
                             var nonceStr = that.randomString();
                             var stringSignTemp = "appId=" + appId + "&nonceStr=" + nonceStr + "&package=prepay_id=" + tmp1[0] + "&signType=MD5&timeStamp=" + timeStamp + "&key=" + key;
-                            console.log(stringSignTemp)
+                            // console.log(stringSignTemp)
                             var sign = minMD5(stringSignTemp).toUpperCase()
 
                             var param = {
@@ -138,7 +151,6 @@ Page({
                             that.pay(param)
                         }
                     },
-
                 })
             },
 
