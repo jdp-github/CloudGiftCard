@@ -44,6 +44,7 @@ function getTextFromSrcPage(srcPage) {
     var index = srcPage.lastIndexOf('text=')
     return srcPage.substring(index + 5, srcPage.length)
 }
+
 module.exports = {
     formatTime: formatTime,
     getCurrentPageUrl: getCurrentPageUrl,

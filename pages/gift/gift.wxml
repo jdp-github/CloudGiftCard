@@ -61,7 +61,7 @@
                 <view>¥{{totalPrice}}</view>
             </view>
             <!-- 按钮 -->
-            <button class='purchase-btn' disabled='{{!canBuy}}'>购买</button>
+            <button class='purchase-btn' disabled='{{!canBuy}}' bindtap='buy' open-type="share">购买</button>
         </view>
     </view>
 

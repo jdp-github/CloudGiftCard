@@ -8,6 +8,7 @@ Page({
      */
     data: {
         // srcPage: '',
+        title: '',
         selectedImgUrl: '',
         productCount: 0,
         totalPrice: 0,
@@ -110,6 +111,9 @@ Page({
             text = '星巴克用星说'
         }
         wx.setNavigationBarTitle({
+            title: options.text
+        })
+        this.setData({
             title: options.text
         })
 
@@ -277,6 +281,25 @@ Page({
         })
     },
 
+    buy: function(e) {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function(res) {
+        if (res.from === 'button') {
+            // 来自页面内转发按钮
+            console.log(res.target)
+        }
+        return {
+            title: this.data.title,
+            path: '/pages/index/index?id=123',
+            imageUrl: this.data.selectedImgUrl
+        }
+    },
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -319,10 +342,4 @@ Page({
 
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
-    }
 })
