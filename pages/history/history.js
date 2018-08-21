@@ -6,7 +6,7 @@ Page({
      */
     data: {
         isSendChecked: true
-        // 未送出 已送出 已兑换 未兑换
+        // 未送出 已送出 已领取 未领取
     },
 
     onCheckChange: function (e) {

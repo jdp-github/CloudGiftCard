@@ -127,7 +127,7 @@ Page({
             console.log(res.target)
         }
         return {
-            title: '星巴克用星说',
+            title: '礼道',
             path: 'pages/index/index',
             success: function(res) {
                 // 转发成功
