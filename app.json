@@ -1,35 +1,29 @@
 {
-  "pages": [
-    "pages/login/login",
-    "pages/index/index",
-    "pages/gift/gift",
-    "pages/history/history",
-    "pages/customserv/customserv"
-  ],
-  "window": {
-    "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "礼道",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "selectedColor": "#00f"
-      },
-      {
-        "pagePath": "pages/history/history",
-        "text": "礼物记录",
-        "selectedColor": "#00f"
-      },
-      {
-        "pagePath": "pages/customserv/customserv",
-        "text": "客服",
-        "selectedColor": "#00f"
-      }
-    ]
-  }
+	"pages": [
+		"pages/login/login",
+		"pages/index/index",
+		"pages/gift/gift",
+		"pages/history/history"
+	],
+	"window": {
+		"backgroundColor": "#F6F6F6",
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#F6F6F6",
+		"navigationBarTitleText": "礼道",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"selectedColor": "#00f"
+			},
+			{
+				"pagePath": "pages/history/history",
+				"text": "礼物记录",
+				"selectedColor": "#00f"
+			}
+		]
+	}
 }

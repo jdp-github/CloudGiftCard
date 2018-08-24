@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        isSendChecked: true
+        isSend: true
         // 未送出 已送出 已领取 未领取
     },
 
@@ -13,11 +13,11 @@ Page({
         var isSend = e.currentTarget.dataset.issend;
         if (isSend === "true") {
             this.setData({
-                isSendChecked: true
+				isSend: true
             })
         } else {
             this.setData({
-                isSendChecked: false
+				isSend: false
             })
         }
 
