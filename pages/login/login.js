@@ -19,6 +19,10 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: function(res) {
+              wx.setStorage({
+                key: "userName",
+                data: res.userInfo.nickName
+              })
               wx.switchTab({
                 url: '../index/index'
               })

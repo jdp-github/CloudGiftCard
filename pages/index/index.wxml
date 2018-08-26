@@ -11,9 +11,9 @@
             </block>
         </swiper>
     </view>
-    <view class="second-section-title">
+    <!-- <view class="second-section-title">
         咖啡+祝福 即刻表心意
-    </view>
+    </view> -->
 
     <view class="block-row" wx:for="{{dataList}}" wx:key="{{item.index}}">
         <view class="block-item" wx:for="{{item}}" wx:key="{{item.index}}">

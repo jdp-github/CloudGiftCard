@@ -1,55 +1,55 @@
 <!--pages/history/history.wxml-->
 <view class='container'>
-    <!-- 头 -->
-    <view class='header-container'>
-        <!-- 我送出的 -->
-        <view class='header-title-container' bindtap='onCheckChange' data-isSend='true'>
-            <text class="{{isSend ? 'header-txt-check':'header-txt-normal'}}">我送出的</text>
-            <view class='header-line' hidden='{{!isSend}}'></view>
-        </view>
-        <!-- 我收到的 -->
-        <view class='header-title-container' bindtap='onCheckChange' data-isSend='false'>
-            <text class="{{isSend ? 'header-txt-normal':'header-txt-check'}}">我收到的</text>
-            <view class='header-line' hidden='{{isSend}}'></view>
-        </view>
+  <!-- 头 -->
+  <view class='header-container'>
+    <!-- 我送出的 -->
+    <view class='header-title-container' bindtap='onCheckChange' data-isSend='true'>
+      <text class="{{isSend ? 'header-txt-check':'header-txt-normal'}}">我送出的</text>
+      <view class='header-line' hidden='{{!isSend}}'></view>
     </view>
-    <!-- content -->
-    <view class='content-container'>
-        <!-- item -->
-        <view class='content-item-container'>
-            <!-- 内容 -->
-            <view class='content-item-body'>
-                <image class='body-gift-img' mode='scaleToFill' src=''></image>
-                <view class='body-text-container'>
-                    <text class='body-gift-name'>礼道 中秋到</text>
-                    <view class='body-desc-container'>
-                        <text class='body-gift-text'>¥ 99.0</text>
-                        <text class='body-gift-text'>数量：4</text>
-                    </view>
-                    <view class='body-line'></view>
-                </view>
-            </view>
-            <!-- 内容 -->
-            <view class='content-item-body'>
-                <image class='body-gift-img' mode='scaleToFill' src=''></image>
-                <view class='body-text-container'>
-                    <text class='body-gift-name'>礼道 中秋到</text>
-                    <view class='body-desc-container'>
-                        <text class='body-gift-text'>¥ 99.0</text>
-                        <text class='body-gift-text'>数量：4</text>
-                    </view>
-                    <view class='body-line'></view>
-                </view>
-            </view>
-            <!-- 线 -->
-            <view class='content-line'></view>
-            <!-- 底 -->
-            <view class='content-item-footer'>
-                <view class='bottom-text'>ssss送出</view>
-                <button class='bottom-btn'>未送出</button>
-            </view>
-            <!-- 隔断 -->
-            <view class='foot-line'></view>
-        </view>
+    <!-- 我收到的 -->
+    <view class='header-title-container' bindtap='onCheckChange' data-isSend='false'>
+      <text class="{{isSend ? 'header-txt-normal':'header-txt-check'}}">我收到的</text>
+      <view class='header-line' hidden='{{isSend}}'></view>
     </view>
+  </view>
+  <!-- content -->
+  <view class='content-container'>
+    <!-- item -->
+    <view class='content-item-container' wx:for='{{isSend ? sentList : receivedList}}' wx:key='{{item.metadata.uid}}'>
+      <!-- 内容 -->
+      <view class='content-item-body' wx:for='{{item.spec.order.spec.goods}}' wx:key='{{item.metadata.uid}}'>
+        <image class='body-gift-img' mode='scaleToFill' src='{{item.spec.logo}}'></image>
+        <view class='body-text-container'>
+          <text class='body-gift-name'>{{item.metadata.description}}</text>
+          <view class='body-desc-container'>
+            <text class='body-gift-text'>数量：{{item.spec.number}}</text>
+            <text class='body-gift-text'>¥ {{item.spec.price}}</text>
+          </view>
+          <!-- 线 -->
+          <view class='body-line'></view>
+        </view>
+      </view>
+      <!-- 底 -->
+      <view class='content-item-footer'>
+        <view class='bottom-text'>{{item.spec.order.status.leftText}}</view>
+        <view class="{{item.spec.order.status.clickable?'bottom-clickable-btn':'bottom-btn'}}" data-item='{{item}}' bindtap='onItemClick'>{{item.spec.order.status.text}}</view>
+      </view>
+      <!-- 隔断 -->
+      <view class='foot-line'></view>
+    </view>
+  </view>
+
+  <!-- 转发 -->
+  <view class='mask' wx:if="{{showShare}}" bindtap='onShareDialogClick'></view>
+  <view class='share-container' wx:if="{{showShare}}">
+    <view class='share-title'>
+      <view>发送给朋友</view>
+    </view>
+    <view class='content-line'></view>
+    <view class='share-btn-container'>
+      <button class='share-btn' open-type='share' bindtap='shareOK'>确定</button>
+      <button class='share-btn' bindtap='shareCancle'>取消</button>
+    </view>
+  </view>
 </view>

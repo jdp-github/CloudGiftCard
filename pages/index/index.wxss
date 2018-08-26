@@ -1,146 +1,147 @@
 /**index.wxss**/
 
 .container {
-    height: 100%;
-    display: block;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0;
-    margin-bottom: 300rpx;
-    box-sizing: border-box;
-    background: #f7f7f7;
+  height: 100%;
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  margin-bottom: 300rpx;
+  box-sizing: border-box;
+  background: #f7f7f7;
 }
 
 page {
-    background-color: #f8f8f8;
-    height: 100%;
-    font-size: 32rpx;
-    line-height: 1.6;
+  background-color: #f8f8f8;
+  height: 100%;
+  font-size: 32rpx;
+  line-height: 1.6;
 }
 
 .page-body {
-    padding-top: 60rpx;
+  padding-top: 60rpx;
 }
 
 .page-section {
-    width: 100%;
-    margin-bottom: 30rpx;
+  width: 100%;
+  margin-bottom: 30rpx;
 }
 
 .page-section_center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page-section:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .page-section-gap {
-    box-sizing: border-box;
-    padding: 0 30rpx;
+  box-sizing: border-box;
+  padding: 0 30rpx;
 }
 
 .page-section-spacing {
-    box-sizing: bor;
+  box-sizing: bor;
 }
 
 .page-section-title {
-    font-size: 28rpx;
-    color: #999;
-    margin-bottom: 10rpx;
-    padding-left: 30rpx;
-    padding-right: 30rpx;
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
 }
 
 .page-section-gap .page-section-title {
-    padding-left: 0;
-    padding-right: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 button {
-    margin-bottom: 30rpx;
+  margin-bottom: 30rpx;
 }
 
 button:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .page-section-title {
-    padding: 0;
+  padding: 0;
 }
 
 .swiper-item {
-    display: block;
-    height: 150px;
+  display: block;
+  height: 150px;
 }
 
 .page-section-title {
-    margin-top: 60rpx;
-    position: relative;
+  margin-top: 60rpx;
+  position: relative;
 }
 
 .info {
-    position: absolute;
-    right: 0;
-    color: #353535;
-    font-size: 30rpx;
+  position: absolute;
+  right: 0;
+  color: #353535;
+  font-size: 30rpx;
 }
 
 .page-foot {
-    margin-top: 50rpx;
+  margin-top: 50rpx;
 }
 
 swiper, .swiper-item {
-    height: 240px;
+  height: 240px;
 }
 
 image {
-    width: 100%;
+  width: 100%;
 }
 
 .second-section-title {
-    font-size: 28rpx;
-    padding-left: 30rpx;
-    padding-right: 30rpx;
+  font-size: 28rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
 }
 
 .block-row {
-    display: flex;
-    flex-direction: row;
-    padding-left: 15rpx;
-    padding-right: 15rpx;
-    margin-top: 25rpx;
-    margin-bottom: 25rpx;
+  display: flex;
+  flex-direction: row;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  margin-top: 25rpx;
+  margin-bottom: 25rpx;
 }
 
 .block-item {
-    width: 50%;
-    padding-left: 15rpx;
-    padding-right: 15rpx;
+  width: 50%;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
 }
 
 .block-frame {
-    background-color: #fff;
-    height: 120px;
-    border-radius: 15rpx;
-    padding: 4rpx;
+  background-color: #fff;
+  height: 120px;
+  border-radius: 15rpx;
+  padding: 4rpx;
 }
 
 .block-img {
-    height: 100px;
-    border-radius: 15rpx;
+  height: 100px;
+  border-radius: 15rpx;
 }
 
 .block-img-src {
-    height: 100px;
+  height: 100px;
+  border-radius: 10rpx;
 }
 
 .block-text {
-    padding-top: 2px;
-    font-size: 12px;
-    color: #999;
-    text-align: center;
+  padding-top: 2px;
+  font-size: 12px;
+  color: #999;
+  text-align: center;
 }

@@ -24,8 +24,8 @@
     <!-- item -->
     <view class='products-item-container'>
 
-      <!-- 图片  -->
-      <image class='products-item-img' mode='aspectFit' src='{{item.spec.logo}}' bindtap='onItemClick' data-item='{{item}}'></image>
+      <!-- 图片 bindtap='onItemClick' -->
+      <image class='products-item-img' mode='aspectFit' src='{{item.spec.logo}}'  data-item='{{item}}'></image>
 
       <!-- 文字  -->
       <view class='products-item-txt'>
