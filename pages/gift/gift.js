@@ -36,7 +36,7 @@ Page({
 
         var title = ''
         if (options.text == "undefined") {
-			title = '礼道心选'
+            title = '礼道心选'
         } else {
             title = options.text;
         }
@@ -242,6 +242,11 @@ Page({
                 path: '/pages/history/history?orderId=' + this.data.wxOrder.out_trade_no,
                 imageUrl: this.data.selectedCard.spec.logo
             }
+        } else {
+            return {
+                title: '礼道心选',
+                path: '/pages/index/index'
+            }
         }
     },
 
@@ -287,7 +292,7 @@ Page({
             method: 'GET',
             success: function(res) {
                 //统一支付签名
-                // console.log(res);
+                console.log(JSON.stringify(res));
                 var appid = 'wx1a597e61cecd1a6f'; //appid  
                 var body = '曲靖市礼道电子商务有限公司'; //商户名
                 var mch_id = '1509805691'; //商户号
@@ -346,6 +351,7 @@ Page({
                     head: 'application/x-www-form-urlencoded',
                     data: formData, // 设置请求的 header
                     success: function(res) {
+                        console.log(res)
                         that.insertOrUpdateOrder('unsent');
                         // console.log(that.makeOrderParam(res))
                         var result_code = that.getXMLNodeValue('result_code', res.data.toString("utf-8"))

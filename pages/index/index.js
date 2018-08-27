@@ -13,7 +13,6 @@ Page({
     },
 
     onLoad: function(options) {
-        console.log('onLoad')
         var self = this;
         // 轮播图
         wx.request({
@@ -22,7 +21,6 @@ Page({
                 'content-type': 'application/json' // 默认值
             },
             success: function(res) {
-                console.log('request 分类 成功 返回')
                 var resObj = JSON.parse(res.data.data);
                 for (var i = 0, len = resObj.kvs.length; i < len; i++) {
                     var itemObj = resObj.kvs[i];
@@ -38,7 +36,7 @@ Page({
                 // console.log(self.data.imgSrc)
             },
             fail: function(res) {
-                console.log('request 分类 失败 返回：' + JSON.stringify(res))
+                
             }
         })
         // 卡片
@@ -87,7 +85,7 @@ Page({
             // console.log(res.target)
         }
         return {
-			title: '礼道心选',
+            title: '礼道心选',
             path: 'pages/index/index',
             success: function(res) {
                 // 转发成功

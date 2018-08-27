@@ -1,97 +1,98 @@
 <!--pages/card/card.wxml-->
 <view class='container root-contanier'>
 
-  <!-- 大图 -->
-  <view class='image-container'>
-    <image class='big-img' mode='aspectFit' src='{{selectedCard.spec.logo}}'></image>
-  </view>
-
-  <!-- 推荐 -->
-  <scroll-view scroll-x class='products-recommend-container'>
-    <view wx:for='{{cardList}}' wx:key='{{item.index}}' class="{{item.isChecked?'products-recommend-img-container-check':'products-recommend-img-container-normal'}}">
-      <image class='products-recommend-img' id='{{item.index}}' mode='aspectFit' src="{{item.spec.logo}}" bindtap='onImageClick' data-selectedcard='{{item}}'>
-      </image>
-      <view hidden='{{!item.isChecked}}' style="position:absolute;right:0rpx;top:-2rpx;" class="products-recommend-check fa fa-check-square"></view>
+    <!-- 大图 -->
+    <view class='image-container'>
+        <image class='big-img' mode='aspectFit' src='{{selectedCard.spec.logo}}'></image>
     </view>
-  </scroll-view>
 
-  <view class='txt-title-container'>
-    <view class='txt-title'>选择商品</view>
-  </view>
-
-  <!-- 列表 -->
-  <view class='products-container' wx:for='{{productList}}' wx:key='{{item.index}}'>
-    <!-- item -->
-    <view class='products-item-container'>
-
-      <!-- 图片 bindtap='onItemClick' -->
-      <image class='products-item-img' mode='aspectFit' src='{{item.spec.logo}}'  data-item='{{item}}'></image>
-
-      <!-- 文字  -->
-      <view class='products-item-txt'>
-        <view>{{item.metadata.description}}</view>
-        <view class='products-item-txt-below'>¥{{item.spec.price}}</view>
-      </view>
-
-      <!-- 按钮  -->
-      <view class='products-item-icon-container'>
-        <view id='{{item.index}}' class="products-item-icon fa fa-plus-square-o" aria-hidden="true" hidden='{{item.spec.hidden}}' bindtap='showCount'></view>
-        <!-- 隐藏 -->
-        <view class='products-item-hidden-container' hidden='{{!item.spec.hidden}}'>
-          <view id='{{item.index}}' class='products-item-icon fa fa-minus-square-o' type='info' bindtap='minusCount'></view>
-          <input id='{{item.index}}' class='products-item-input' bindblur='onFocusChange' type='number' maxlength='2' value='{{item.spec.count}}'></input>
-          <view id='{{item.index}}' class="products-item-icon-color products-item-icon fa fa-plus-square-o" type='success' color='#00f' bindtap='addCount'></view>
+    <!-- 推荐 -->
+    <scroll-view scroll-x class='products-recommend-container'>
+        <view wx:for='{{cardList}}' wx:key='{{item.index}}' class="{{item.isChecked?'products-recommend-img-container-check':'products-recommend-img-container-normal'}}">
+            <image class='products-recommend-img' id='{{item.index}}' mode='aspectFit' src="{{item.spec.logo}}" bindtap='onImageClick' data-selectedcard='{{item}}'>
+            </image>
+            <view hidden='{{!item.isChecked}}' style="position:absolute;right:0rpx;top:-2rpx;" class="products-recommend-check fa fa-check-square"></view>
         </view>
-      </view>
+    </scroll-view>
+
+    <view class='txt-title-container'>
+        <view class='txt-title'>选择商品</view>
     </view>
 
-    <!-- 分割线 -->
-    <view class='products-item-line'></view>
-  </view>
+    <!-- 列表 -->
+    <view class='products-container' wx:for='{{productList}}' wx:key='{{item.index}}'>
+        <!-- item -->
+        <view class='products-item-container'>
 
-  <!-- footer -->
-  <view class='footer-container'>
-    <!-- 分割线 -->
-    <view style=' height: 1rpx;width: 100%; background: #e9ecee;'></view>
-    <!-- 底部项 -->
-    <view class='footer-item-contanier'>
-      <!-- 左边文字 -->
-      <view class='footer-left'>
-        <view style='color:#7C7C7C;font-size:30rpx'>{{productCount}}份礼品</view>
-        <view>¥{{totalPrice}}</view>
-      </view>
-      <!-- 按钮 -->
-      <button class='purchase-btn' disabled='{{!canBuy}}' bindtap='buy'>购买</button>
-    </view>
-  </view>
+            <!-- 图片 bindtap='onItemClick' -->
+            <image class='products-item-img' mode='aspectFit' src='{{item.spec.logo}}' data-item='{{item}}'></image>
 
-  <!-- 弹出框 -->
-  <view class='mask' wx:if="{{showDialog}}" bindtap='onMaskClick'></view>
-  <view class='dialog-container' animation="{{animationData}}" wx:if="{{showDialog}}">
-    <!-- avatar -->
-    <view class='dialog-title-container'>
-      <image class='dialog-img' mode='aspectFill' src='{{clickItem.imgUrl}}'></image>
-      <view class='dialog-title'>{{clickItem.name}}</view>
-      <view class='dialog-price'>¥{{clickItem.price}}</view>
-    </view>
-    <!-- 内容 -->
-    <view class='dialog-content-contanier'>
-      <scroll-view class='dialog-content-scroll-view' scroll-y>
-        <image class='dialog-long-img' mode='aspectFit'></image>
-      </scroll-view>
-    </view>
-  </view>
+            <!-- 文字  -->
+            <view class='products-item-txt'>
+                <view>{{item.metadata.description}}</view>
+                <view class='products-item-txt-below'>¥{{item.spec.price}}</view>
+            </view>
 
-  <!-- 转发 -->
-  <view class='mask' wx:if="{{showShare}}" bindtap='onShareMaskClick'></view>
-  <view class='share-container' wx:if="{{showShare}}">
-    <view class='share-title'>
-      <view>发送给朋友</view>
+            <!-- 按钮  -->
+            <view class='products-item-icon-container'>
+                <view id='{{item.index}}' class="products-item-icon fa fa-plus-square-o" aria-hidden="true" hidden='{{item.spec.hidden}}' bindtap='showCount'></view>
+                <!-- 隐藏 -->
+                <view class='products-item-hidden-container' hidden='{{!item.spec.hidden}}'>
+                    <view id='{{item.index}}' class='products-item-icon fa fa-minus-square-o' type='info' bindtap='minusCount'></view>
+                    <input id='{{item.index}}' class='products-item-input' bindblur='onFocusChange' type='number' maxlength='2' value='{{item.spec.count}}'></input>
+                    <view id='{{item.index}}' class="products-item-icon-color products-item-icon fa fa-plus-square-o" type='success' color='#00f' bindtap='addCount'></view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 分割线 -->
+        <view class='products-item-line'></view>
     </view>
-    <view class='products-item-line'></view>
-    <view class='share-btn-container'>
-      <button class='share-btn' open-type='share' bindtap='shareOK'>确定</button>
-      <button class='share-btn' bindtap='shareCancle'>取消</button>
+
+    <!-- footer -->
+    <view class='footer-container'>
+        <!-- 分割线 -->
+        <view style=' height: 1rpx;width: 100%; background: #e9ecee;'></view>
+        <!-- 底部项 -->
+        <view class='footer-item-contanier'>
+            <!-- 左边文字 -->
+            <view class='footer-left'>
+                <view style='color:#7C7C7C;font-size:30rpx'>{{productCount}}份礼品</view>
+                <view>¥{{totalPrice}}</view>
+            </view>
+            <!-- 按钮 -->
+            <button class='purchase-btn' disabled='{{!canBuy}}' bindtap='buy'>购买</button>
+        </view>
     </view>
-  </view>
+
+    <!-- 弹出框 -->
+    <view class='mask' wx:if="{{showDialog}}" bindtap='onMaskClick'></view>
+    <view class='dialog-container' animation="{{animationData}}" wx:if="{{showDialog}}">
+        <!-- avatar -->
+        <view class='dialog-title-container'>
+            <image class='dialog-img' mode='aspectFill' src='{{clickItem.imgUrl}}'></image>
+            <view class='dialog-title'>{{clickItem.name}}</view>
+            <view class='dialog-price'>¥{{clickItem.price}}</view>
+        </view>
+        <!-- 内容 -->
+        <view class='dialog-content-contanier'>
+            <scroll-view class='dialog-content-scroll-view' scroll-y>
+                <image class='dialog-long-img' mode='aspectFit'></image>
+            </scroll-view>
+        </view>
+    </view>
+
+    <!-- 转发 -->
+    <view class='mask' wx:if="{{showShare}}" bindtap='onShareMaskClick'></view>
+    <view class='share-container' wx:if="{{showShare}}">
+        <view class='share-title'>
+            <view>发送给朋友</view>
+        </view>
+        <view class='products-item-line'></view>
+        <view class='share-btn-container'>
+            <button class='share-btn share-btn-ok' open-type='share' bindtap='shareOK'>确定</button>
+            <view class='vertical-line'></view>
+            <button class='share-btn' bindtap='shareCancle'>取消</button>
+        </view>
+    </view>
 </view>

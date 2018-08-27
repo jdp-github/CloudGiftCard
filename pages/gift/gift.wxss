@@ -9,19 +9,18 @@
     display: -webkit-flex;
     justify-content: center;
     align-items: center;
-    height: 350rpx;
     width: 100%;
+    height: 450rpx;
 }
 
 .big-img {
-    width: 100%;
-    padding: 30rpx;
+    padding: 20rpx;
 }
 
 .products-recommend-container {
     white-space: nowrap;
     width: 100%;
-    margin-top: 60rpx;
+    margin-top: 20rpx;
 }
 
 .products-recommend-img-container-normal {
@@ -53,7 +52,7 @@
 
 .txt-title-container {
     width: 100%;
-    background: 00f;
+    margin-top: 20rpx;
 }
 
 .txt-title {
@@ -170,6 +169,7 @@
     width: 27%;
     margin-right: 30rpx;
     bottom: 20rpx;
+    border: 1rpx solid lightgray;
 }
 
 .purchase-btn text {
@@ -243,7 +243,7 @@
 
 .share-container {
     width: 80%;
-    height: 30%;
+    height: 20%;
     overflow: hidden;
     top: 30%;
     position: fixed;
@@ -260,18 +260,33 @@
     display: -webkit-flex;
     justify-content: center;
     align-items: center;
+    font-size: 45rpx;
 }
 
 .share-btn-container {
     width: 100%;
     display: flex;
     display: -webkit-flex;
+    align-items: center;
     flex-flow: row;
 }
 
 .share-btn {
-    width: 50%;
+    width: 48%;
     height: 100%;
     background: #fff;
-    border: 0rpx solid #000;
+}
+
+.share-btn-ok {
+    color: green;
+}
+
+.vertical-line {
+    width: 1rpx;
+    height: 60rpx;
+    background: #e9ecee;
+}
+
+button::after {
+    border: none;
 }
