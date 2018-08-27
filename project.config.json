@@ -7,11 +7,11 @@
 		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
-		"minified": true,
+		"minified": false,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.2.2",
+	"libVersion": "2.2.4",
 	"appid": "wx1a597e61cecd1a6f",
 	"projectname": "Lytall",
 	"isGameTourist": false,
