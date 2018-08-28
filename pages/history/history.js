@@ -87,7 +87,7 @@ Page({
                 for (var i = 0, j = 0, k = 0, len = resObj.kvs.length; i < len; i++) {
                     var itemObj = resObj.kvs[i];
                     var item = JSON.parse(base64.decode(itemObj.value))
-                    console.log(base64.decode(itemObj.value))
+                    // console.log(base64.decode(itemObj.value))
                     if (i == 0) {
                         that.requestCard(item.spec.order.spec.goods[i].spec.cardUID);
                     }
@@ -95,27 +95,25 @@ Page({
                     if (process == 'unsent') {
                         item.spec.order.status.text = '未送出';
                         item.spec.order.status.clickable = true;
-                        item.spec.order.status.leftText = item.metadata.creationTimestamp.substring(0, 10) + ' ' + item.metadata.creationTimestamp.substring(11, 19)
                     } else if (process == 'sent') {
                         item.spec.order.status.text = '已送出';
                         item.spec.order.status.clickable = false;
-                        item.spec.order.status.leftText = item.metadata.creationTimestamp.substring(0, 10) + ' ' + item.metadata.creationTimestamp.substring(11, 19)
-                    } else if (process == 'received') {
+                        } else if (process == 'received') {
                         item.spec.order.status.text = '已领取';
                         item.spec.order.status.clickable = false;
-                        item.spec.order.status.leftText = item.spec.order.spec.openIDUsername + ' 送出';
                     } else if (process == 'unreceived') {
                         item.spec.order.status.text = '未领取';
                         item.spec.order.status.clickable = true;
-                        if (item.spec.order.spec.openIDUsername != '') {
-                            item.spec.order.status.leftText = item.spec.order.spec.openIDUsername + ' 送出';
-                        }
                     }
 
-                    if (item.spec.order.spec.receivedOpenID == openid) {
-                        that.data.receivedList[j] = item;
+                    if (item.spec.order.spec.receivedOpenID == openid) {// 我收到的
+						if (item.spec.order.spec.openIDUsername != '') {
+							item.spec.order.status.leftText = item.spec.order.spec.openIDUsername + ' 送出';
+						}
+						that.data.receivedList[j] = item;
                         j++;
-                    } else {
+                    } else {// 我送出的
+						item.spec.order.status.leftText = item.metadata.creationTimestamp.substring(0, 10) + ' ' + item.metadata.creationTimestamp.substring(11, 19)
                         that.data.sentList[k] = item;
                         k++;
                     }
@@ -179,12 +177,27 @@ Page({
                 showShare: true
             })
         } else if (process == 'unreceived') { // 未领取
-            wx.chooseAddress({
-                success: function(res) {
-                    that.setData({
-                        address: res
-                    })
-                    that.insertOrUpdateOrder('received')
+            wx.getSetting({
+                success(res) {
+                    if (!res.authSetting['scope.address']) {
+                        wx.openSetting({})
+                    } else {
+                        //打开选择地址
+                        wx.chooseAddress({
+                            success: function(res) {
+                                that.setData({
+                                    address: res
+                                })
+                                that.insertOrUpdateOrder('received')
+                            },
+                            fail: function(res) {
+                                console.log(res)
+                            }
+                        })
+                    }
+                },
+                fail(res) {
+                    console.log('调用失败')
                 }
             })
         }

@@ -1,2 +1,4 @@
 <!--pages/customserv/customserv.wxml-->
-<text>pages/customserv/customserv.wxml</text>
+<view class='container'>
+    <button open-type='contact'>联系在线客服</button>
+</view>

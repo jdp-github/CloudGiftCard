@@ -48,7 +48,7 @@
     </view>
     <view class='content-line'></view>
     <view class='share-btn-container'>
-      <button class='share-btn' open-type='share' bindtap='shareOK'>确定</button>
+      <button class='share-btn share-btn-ok' open-type='share' bindtap='shareOK'>确定</button>
       <button class='share-btn' bindtap='shareCancle'>取消</button>
     </view>
   </view>
