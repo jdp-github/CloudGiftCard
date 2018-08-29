@@ -30,7 +30,7 @@
 }
 
 .products-recommend-img-container-check {
-    border: 15rpx solid #0f0;
+    border: 15rpx solid #c33;
     border-width: 3rpx;
     border-radius: 10rpx;
     display: inline-block;
@@ -46,7 +46,7 @@
 }
 
 .products-recommend-check {
-    color: #0f0;
+    color: #c33;
     font-size: 40rpx;
 }
 

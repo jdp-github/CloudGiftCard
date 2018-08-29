@@ -9,7 +9,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        isSend: true,
+        isSend: false,
         sentList: [],
         receivedList: [],
         order: {},
