@@ -1,6 +1,6 @@
 // pages/history/history.js
 var base64 = require('../../utils/base64.js');
-var RSA = require('../../utils/wxapp_rsa.js')
+var RSA = require('../../utils/wxapp_rsa.js');
 var key = require('../../key/id_rsa.js');
 
 Page({
@@ -98,7 +98,7 @@ Page({
                     } else if (process == 'sent') {
                         item.spec.order.status.text = '已送出';
                         item.spec.order.status.clickable = false;
-                        } else if (process == 'received') {
+                    } else if (process == 'received') {
                         item.spec.order.status.text = '已领取';
                         item.spec.order.status.clickable = false;
                     } else if (process == 'unreceived') {
@@ -106,14 +106,14 @@ Page({
                         item.spec.order.status.clickable = true;
                     }
 
-                    if (item.spec.order.spec.receivedOpenID == openid) {// 我收到的
-						if (item.spec.order.spec.openIDUsername != '') {
-							item.spec.order.status.leftText = item.spec.order.spec.openIDUsername + ' 送出';
-						}
-						that.data.receivedList[j] = item;
+                    if (item.spec.order.spec.receivedOpenID == openid) { // 我收到的
+                        if (item.spec.order.spec.openIDUsername != '') {
+                            item.spec.order.status.leftText = item.spec.order.spec.openIDUsername + ' 送出';
+                        }
+                        that.data.receivedList[j] = item;
                         j++;
-                    } else {// 我送出的
-						item.spec.order.status.leftText = item.metadata.creationTimestamp.substring(0, 10) + ' ' + item.metadata.creationTimestamp.substring(11, 19)
+                    } else { // 我送出的
+                        item.spec.order.status.leftText = item.metadata.creationTimestamp.substring(0, 10) + ' ' + item.metadata.creationTimestamp.substring(11, 19)
                         that.data.sentList[k] = item;
                         k++;
                     }
@@ -179,10 +179,47 @@ Page({
         } else if (process == 'unreceived') { // 未领取
             wx.getSetting({
                 success(res) {
-                    if (!res.authSetting['scope.address']) {
+                    if (res.authSetting['scope.address'] == false) {
                         wx.openSetting({})
                     } else {
                         //打开选择地址
+                        wx.chooseAddress({
+                            success: function(res) {
+                                that.setData({
+                                    address: res
+                                })
+                                that.insertOrUpdateOrder('received')
+                            },
+                            fail: function(res) {
+                                console.log(res)
+                            }
+                        })
+                    }
+                },
+                fail(res) {
+                    console.log('调用失败')
+                }
+            })
+        }
+    },
+
+    // 自己领取
+    onSelfReceive: function(e) {
+        var that = this;
+        var item = e.currentTarget.dataset.item;
+        this.setData({
+            order: item
+        })
+        // console.log(this.data.order)
+        var process = item.spec.order.status.process;
+        if (process == 'unsent') { // 未送出
+            //打开选择地址
+            wx.getSetting({
+                success(res) {
+                    console.log(res.authSetting['scope.address'])
+                    if (res.authSetting['scope.address'] == false) {
+                        wx.openSetting({})
+                    } else {
                         wx.chooseAddress({
                             success: function(res) {
                                 that.setData({
@@ -276,7 +313,20 @@ Page({
             return {
                 title: this.data.card.metadata.description,
                 path: '/pages/history/history?orderId=' + this.data.order.metadata.name,
-                imageUrl: this.data.card.spec.logo
+                imageUrl: this.data.card.spec.logo,
+                success: function(res) {
+                    this.insertOrUpdateOrder('sent');
+                },
+                fail: function(res) {
+                    wx.showToast({
+                        title: '分享失败',
+                    })
+                }
+            }
+        } else {
+            return {
+                title: '礼道心选',
+                path: '/pages/index/index'
             }
         }
     },
@@ -288,7 +338,6 @@ Page({
     },
 
     shareOK: function(e) {
-        this.insertOrUpdateOrder('sent');
         this.setData({
             showShare: false
         })

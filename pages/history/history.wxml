@@ -33,6 +33,7 @@
             <!-- 底 -->
             <view class='content-item-footer'>
                 <view class='bottom-text'>{{item.spec.order.status.leftText}}</view>
+                <view class='bottom-clickable-btn' hidden='{{!item.spec.order.status.clickable}}' data-item='{{item}}' bindtap='onSelfReceive'>自己领取</view>
                 <view class="{{item.spec.order.status.clickable?'bottom-clickable-btn':'bottom-btn'}}" data-item='{{item}}' bindtap='onItemClick'>{{item.spec.order.status.text}}</view>
             </view>
             <!-- 隔断 -->
@@ -46,9 +47,10 @@
         <view class='share-title'>
             <view>发送给朋友</view>
         </view>
-        <view class='content-line'></view>
+        <view class='share-line'></view>
         <view class='share-btn-container'>
             <button class='share-btn share-btn-ok' open-type='share' bindtap='shareOK'>确定</button>
+            <view class='vertical-line'></view>
             <button class='share-btn' bindtap='shareCancle'>取消</button>
         </view>
     </view>

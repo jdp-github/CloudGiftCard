@@ -4,7 +4,7 @@
         <swiper interval="{{interval}}" duration="{{duration}}" indicator-dots>
             <block wx:for="{{imgSrc}}" wx:key="*this">
                 <swiper-item>
-                    <view class="swiper-item" bindtap="navigate" data-id="1">
+                    <view class="swiper-item" bindtap="bannerNavigate" data-id="1">
                         <image class='big-image' mode="aspectFit" src="{{item}}"></image>
                     </view>
                 </swiper-item>
@@ -15,7 +15,7 @@
     <view class="block-row" wx:for="{{dataList}}" wx:key="{{item.index}}">
         <view class="block-item" wx:for="{{item}}" wx:key="{{item.index}}">
             <view class="block-frame">
-                <view class="block-img" bindtap="navigate" data-id="{{item.index}}" data-text="{{item.metadata.description}}">
+                <view class="block-img" bindtap="cardNavigate" data-id="{{item.index}}" data-text="{{item.metadata.description}}">
                     <image class="block-img-src" mode="" src="{{item.spec.logo}}"></image>
                 </view>
                 <view class="block-text">

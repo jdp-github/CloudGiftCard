@@ -36,7 +36,7 @@ Page({
                 // console.log(self.data.imgSrc)
             },
             fail: function(res) {
-                
+
             }
         })
         // 卡片
@@ -95,7 +95,7 @@ Page({
             }
         }
     },
-    navigate: function(e) {
+    cardNavigate: function(e) {
         // console.log(e)
         var selectedIndex = e.currentTarget.dataset.id;
         var selectedCard = {};
@@ -113,4 +113,21 @@ Page({
                 '&cardList=' + JSON.stringify(this.data.cardList) + '&selectedCard=' + JSON.stringify(selectedCard)
         })
     },
+
+    bannerNavigate: function(e) {
+        var selectedIndex = e.currentTarget.dataset.id;
+        var selectedCard = {};
+        for (var i = 0, len = this.data.cardList.length; i < len; i++) {
+            if (i == selectedIndex) {
+                this.data.cardList[i].isChecked = true;
+                selectedCard = this.data.cardList[i];
+            } else {
+                this.data.cardList[i].isChecked = false;
+            }
+        }
+
+        wx.navigateTo({
+            url: '../bannerimg/bannerimg?text=' + e.currentTarget.dataset.text + '&selectedCard=' + JSON.stringify(selectedCard)
+        })
+    }
 })

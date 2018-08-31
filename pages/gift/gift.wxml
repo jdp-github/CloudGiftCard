@@ -24,8 +24,8 @@
         <!-- item -->
         <view class='products-item-container'>
 
-            <!-- 图片 bindtap='onItemClick' -->
-            <image class='products-item-img' mode='aspectFit' src='{{item.spec.logo}}' data-item='{{item}}'></image>
+            <!-- 图片 -->
+            <image class='products-item-img' mode='aspectFit' src='{{item.spec.logo}}' data-item='{{item}}' bindtap='onItemClick'></image>
 
             <!-- 文字  -->
             <view class='products-item-txt'>
@@ -70,9 +70,11 @@
     <view class='dialog-container' animation="{{animationData}}" wx:if="{{showDialog}}">
         <!-- avatar -->
         <view class='dialog-title-container'>
-            <image class='dialog-img' mode='aspectFill' src='{{clickItem.imgUrl}}'></image>
-            <view class='dialog-title'>{{clickItem.name}}</view>
-            <view class='dialog-price'>¥{{clickItem.price}}</view>
+            <image class='dialog-img' mode='aspectFill' src='{{clickItem.spec.logo}}'></image>
+            <view class='dialog-title-text-container'>
+                <view class='dialog-title'>{{clickItem.metadata.description}}</view>
+                <view class='dialog-price'>¥{{clickItem.spec.price}}</view>
+            </view>
         </view>
         <!-- 内容 -->
         <view class='dialog-content-contanier'>
@@ -88,7 +90,7 @@
         <view class='share-title'>
             <view>发送给朋友</view>
         </view>
-        <view class='products-item-line'></view>
+        <view class='share-line'></view>
         <view class='share-btn-container'>
             <button class='share-btn share-btn-ok' open-type='share' bindtap='shareOK'>确定</button>
             <view class='vertical-line'></view>

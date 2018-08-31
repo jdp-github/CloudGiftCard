@@ -205,27 +205,34 @@
     align-items: flex-end;
 }
 
+.dialog-title-text-container {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+}
+
 .dialog-img {
     width: 200rpx;
     height: 200rpx;
     border: 5rpx solid white;
     border-radius: 15rpx;
-    margin-left: 100rpx;
+    margin-left: 50rpx;
     z-index: 1003;
 }
 
 .dialog-title {
-    font-size: 40rpx;
+    font-size: 35rpx;
     color: #000;
     z-index: 1003;
     margin-left: 20rpx;
 }
 
 .dialog-price {
-    font-size: 40rpx;
+    font-size: 35rpx;
     color: #000;
     z-index: 1003;
     margin-left: 20rpx;
+    margin-top: 5rpx;
 }
 
 .dialog-content-contanier {
@@ -241,9 +248,13 @@
     margin-top: 110rpx;
 }
 
+.dialog-long-img {
+    width: 100%;
+    height: 100%;
+}
+
 .share-container {
     width: 80%;
-    height: 20%;
     overflow: hidden;
     top: 30%;
     position: fixed;
@@ -255,12 +266,18 @@
 
 .share-title {
     width: 100%;
-    height: 75%;
+    height: 200rpx;
     display: flex;
     display: -webkit-flex;
     justify-content: center;
     align-items: center;
     font-size: 45rpx;
+}
+
+.share-line {
+    width: 100%;
+    height: 1rpx;
+    background: #e9ecee;
 }
 
 .share-btn-container {
@@ -269,16 +286,17 @@
     display: -webkit-flex;
     align-items: center;
     flex-flow: row;
+    background: white;
 }
 
 .share-btn {
     width: 48%;
-    height: 100%;
+    height: 100rpx;
     background: #fff;
 }
 
 .share-btn-ok {
-    color: green;
+    color: #c33;
 }
 
 .vertical-line {
