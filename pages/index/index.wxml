@@ -4,8 +4,8 @@
         <swiper interval="{{interval}}" duration="{{duration}}" indicator-dots>
             <block wx:for="{{imgSrc}}" wx:key="*this">
                 <swiper-item>
-                    <view class="swiper-item" bindtap="bannerNavigate" data-id="1">
-                        <image class='big-image' mode="widthFix" src="{{item}}"></image>
+                    <view class="swiper-item" bindtap="bannerNavigate" data-item='{{item}}'>
+                        <image class='big-image' mode="widthFix" src="{{item.logo}}"></image>
                     </view>
                 </swiper-item>
             </block>

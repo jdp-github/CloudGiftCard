@@ -36,12 +36,13 @@ Page({
                 wx.request({
                     url: "https://www.lytall.com/v1/wxopenid/" + res.code,
                     success: function(res) {
-                        var openid = JSON.parse(res.data.data).openid;
-                        console.log(openid)
+                        var receivedOpenid = JSON.parse(res.data.data).openid;
+                        // console.log(receivedOpenid)
                         if (that.isEmptyObject(options)) {
-                            that.requestHistoryList(openid);
+                            that.requestHistoryList(receivedOpenid);
                         } else {
-                            that.updateOrder(options.orderId, openid);
+                            console.log('receivedOpenid:' + receivedOpenid + '    openid:' + options.openid)
+                            that.updateOrder(options.orderId, receivedOpenid, options.openid);
                         }
                     }
                 })
@@ -49,10 +50,10 @@ Page({
         });
     },
 
-    updateOrder: function(orderId, openid) {
+    updateOrder: function(orderId, receivedOpenid, openid) {
         var that = this;
         wx.request({
-            url: 'https://www.lytall.com/v1/receivedStatus/',
+            url: 'https://www.lytall.com/v1/receivedOrder',
             header: {
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Authorization': 'Bearer ' + that.makeRSAStr()
@@ -61,10 +62,11 @@ Page({
             data: {
                 uid: orderId,
                 process: 'unreceived',
-                receivedOpenID: openid
+                receivedOpenID: receivedOpenid,
+                openid: openid
             },
             success(res) {
-                that.requestHistoryList(openid);
+                that.requestHistoryList(receivedOpenid);
             },
             fail(res) {
                 wx.hideLoading();
@@ -76,13 +78,12 @@ Page({
     requestHistoryList: function(openid) {
         var that = this;
         wx.request({
-            url: 'https://www.lytall.com/v1/history',
+            url: 'https://www.lytall.com/v1/histories',
             data: {
-                // TODO
-                // openid: 'onPlJ5KvbcMw5FIwnXKx0x5NHxoc'
                 openid: openid
             },
             success(res) {
+                // debugger
                 var resObj = JSON.parse(res.data.data);
                 for (var i = 0, j = 0, k = 0, len = resObj.kvs.length; i < len; i++) {
                     var itemObj = resObj.kvs[i];
@@ -95,15 +96,19 @@ Page({
                     if (process == 'unsent') {
                         item.spec.order.status.text = '未送出';
                         item.spec.order.status.clickable = true;
+                        item.spec.order.status.showSelfReceive = true;
                     } else if (process == 'sent') {
                         item.spec.order.status.text = '已送出';
                         item.spec.order.status.clickable = false;
+						item.spec.order.status.showSelfReceive = false;
                     } else if (process == 'received') {
                         item.spec.order.status.text = '已领取';
                         item.spec.order.status.clickable = false;
+						item.spec.order.status.showSelfReceive = false;
                     } else if (process == 'unreceived') {
                         item.spec.order.status.text = '未领取';
                         item.spec.order.status.clickable = true;
+						item.spec.order.status.showSelfReceive = false;
                     }
 
                     if (item.spec.order.spec.receivedOpenID == openid) { // 我收到的
@@ -113,10 +118,11 @@ Page({
                         that.data.receivedList[j] = item;
                         j++;
                     } else { // 我送出的
-                        item.spec.order.status.leftText = item.metadata.creationTimestamp.substring(0, 10) + ' ' + item.metadata.creationTimestamp.substring(11, 19)
+                        item.spec.order.status.leftText = item.metadata.creationTimestamp.substring(0, 10) + ' ' + item.metadata.creationTimestamp.substring(11, 19);
                         that.data.sentList[k] = item;
                         k++;
                     }
+                    console.log(item)
                 }
                 // console.log('送出：' + JSON.stringify(that.data.sentList))
                 // console.log('收到：' + JSON.stringify(that.data.receivedList))
@@ -124,6 +130,10 @@ Page({
                     sentList: that.data.sentList,
                     receivedList: that.data.receivedList,
                 })
+            },
+            fail(res) {
+                wx.hideLoading()
+                console.log('失败：' + res)
             },
             complete(res) {
                 wx.hideLoading()
@@ -170,7 +180,7 @@ Page({
         this.setData({
             order: item
         })
-        // console.log(this.data.order)
+        console.log(this.data.order)
         var process = item.spec.order.status.process;
         if (process == 'unsent') { // 未送出
             this.setData({
@@ -249,7 +259,7 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Authorization': 'Bearer ' + that.makeRSAStr()
             },
-            method: 'POST',
+            method: 'PUT',
             data: that.makeOrderParam(process),
             success: function(res) {
                 // console.log("成功" + res)
@@ -309,13 +319,14 @@ Page({
      */
     onShareAppMessage: function(res) {
         // 来自页面内转发按钮
+        var that = this;
         if (res.from === 'button') {
             return {
                 title: this.data.card.metadata.description,
-                path: '/pages/history/history?orderId=' + this.data.order.metadata.name,
+                path: '/pages/history/history?orderId=' + this.data.order.metadata.name + '&openid=' + this.data.order.spec.wxOrder.openid,
                 imageUrl: this.data.card.spec.logo,
                 success: function(res) {
-                    this.insertOrUpdateOrder('sent');
+                    that.insertOrUpdateOrder('sent');
                 },
                 fail: function(res) {
                     wx.showToast({

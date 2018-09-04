@@ -235,13 +235,14 @@ Page({
      */
     onShareAppMessage: function(res) {
         // 来自页面内转发按钮
+        var that = this;
         if (res.from === 'button') {
             return {
                 title: this.data.title,
-                path: '/pages/history/history?orderId=' + this.data.wxOrder.out_trade_no,
+                path: '/pages/history/history?orderId=' + this.data.wxOrder.out_trade_no + '&openid=' + this.data.wxOrder.openid,
                 imageUrl: this.data.selectedCard.spec.logo,
                 success: function(res) {
-                    this.insertOrUpdateOrder('sent')
+                    that.insertOrUpdateOrder('sent', 'PUT')
                 },
                 fail: function(res) {
                     wx.showToast({
@@ -359,7 +360,7 @@ Page({
                     data: formData, // 设置请求的 header
                     success: function(res) {
                         // console.log(res)
-                        that.insertOrUpdateOrder('unsent');
+                        that.insertOrUpdateOrder('unsent', 'POST');
                         // console.log(that.makeOrderParam(res))
                         var result_code = that.getXMLNodeValue('result_code', res.data.toString("utf-8"))
                         var resultCode = result_code.split('[')[2].split(']')[0]
@@ -427,7 +428,7 @@ Page({
     },
 
     // 插入 or 更新订单
-    insertOrUpdateOrder: function(process) {
+    insertOrUpdateOrder: function(process, method) {
         var that = this;
         wx.request({
             url: 'https://www.lytall.com/v1/order',
@@ -435,13 +436,13 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded', // 默认值
                 'Authorization': 'Bearer ' + that.makeRSAStr()
             },
-            method: 'POST',
+            method: method,
             data: that.makeOrderParam(process),
             success: function(res) {
-                // console.log("成功" + res)
+
             },
             fail: function(res) {
-                // console.log("失败" + res)
+
             }
         })
     },
@@ -506,7 +507,7 @@ Page({
                 })
                 // 减库存
                 wx.request({
-                    url: 'https://www.lytall.com/v1/paystatus',
+                    url: 'https://www.lytall.com/v1/confirmOrder',
                     method: 'POST',
                     header: {
                         'content-type': 'application/x-www-form-urlencoded', // 默认值
@@ -514,7 +515,8 @@ Page({
                     },
                     data: {
                         uid: that.data.wxOrder.out_trade_no,
-                        status: true
+                        status: true,
+                        openid: that.data.wxOrder.openid
                     },
                     success: function(res) {
                         // console.log(res)

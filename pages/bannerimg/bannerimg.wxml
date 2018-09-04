@@ -1,6 +1,6 @@
 <!--pages/bannerimg/bannerimg.wxml-->
 <view class='container root-contanier'>
     <scroll-view class='banner-scroll-view' scroll-y>
-        <image class='banner-long-img' mode='aspectFit'></image>
+        <image class='banner-long-img' mode='widthFix' src='{{forwardURL}}'></image>
     </scroll-view>
 </view>

@@ -27,7 +27,7 @@ Page({
                     var item = JSON.parse(base64.decode(itemObj.value));
                     // console.log(base64.decode(itemObj.value))
                     for (var j = 0, lenj = item.cards.length; j < lenj; j++) {
-                        self.data.imgSrc[j] = item.cards[j].spec.logo;
+                        self.data.imgSrc[j] = item.cards[j].spec;
                     }
                 }
                 self.setData({
@@ -49,7 +49,7 @@ Page({
             success: function(res) {
                 var resObj = JSON.parse(res.data.data);
                 var rowList = [];
-                for (var i = 0, len = resObj.kvs.length, j = 0; i < len; i++) {
+                for (var i = 0, len = resObj.kvs.length - 2, j = 0; i < len; i++) {
                     var itemBase64 = resObj.kvs[i];
                     var item = JSON.parse(base64.decode(itemBase64.value));
                     // console.log(base64.decode(itemBase64.value))
@@ -95,6 +95,7 @@ Page({
             }
         }
     },
+
     cardNavigate: function(e) {
         // console.log(e)
         var selectedIndex = e.currentTarget.dataset.id;
@@ -115,19 +116,10 @@ Page({
     },
 
     bannerNavigate: function(e) {
-        var selectedIndex = e.currentTarget.dataset.id;
-        var selectedCard = {};
-        for (var i = 0, len = this.data.cardList.length; i < len; i++) {
-            if (i == selectedIndex) {
-                this.data.cardList[i].isChecked = true;
-                selectedCard = this.data.cardList[i];
-            } else {
-                this.data.cardList[i].isChecked = false;
-            }
-        }
+        var carousel = e.currentTarget.dataset.item;
 
         wx.navigateTo({
-            url: '../bannerimg/bannerimg?text=' + e.currentTarget.dataset.text + '&selectedCard=' + JSON.stringify(selectedCard)
+            url: '../bannerimg/bannerimg?forwardURL=' + carousel.forwardURL
         })
     }
 })

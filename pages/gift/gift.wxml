@@ -79,7 +79,7 @@
         <!-- 内容 -->
         <view class='dialog-content-contanier'>
             <scroll-view class='dialog-content-scroll-view' scroll-y>
-                <image class='dialog-long-img' mode='aspectFit'></image>
+                <image class='dialog-long-img' mode='widthFix' src='{{clickItem.spec.forwardURL}}'></image>
             </scroll-view>
         </view>
     </view>

@@ -5,7 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-		
+        forwardURL: ''
     },
 
     /**
@@ -13,9 +13,10 @@ Page({
      */
     onLoad: function(options) {
         wx.setNavigationBarTitle({
-            title: wx.setNavigationBarTitle({
-                title: options.text
-            })
+            title: '礼道心选'
+        })
+        this.setData({
+            forwardURL: options.forwardURL
         })
     },
 

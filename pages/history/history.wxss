@@ -54,13 +54,27 @@
     background: #e9ecee;
 }
 
+.content-item-title {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 30rpx;
+    color: #999;
+    margin-top: 10rpx;
+}
+
+.title-line {
+    height: 1rpx;
+    background: #e9ecee;
+    margin-top: 10rpx;
+}
+
 .content-item-body {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     padding-top: 15rpx;
-    /* padding-bottom: 10rpx; *//* background: #00f; */
 }
 
 .body-text-container {
