@@ -5,7 +5,7 @@
             <block wx:for="{{imgSrc}}" wx:key="*this">
                 <swiper-item>
                     <view class="swiper-item" bindtap="bannerNavigate" data-id="1">
-                        <image class='big-image' mode="aspectFit" src="{{item}}"></image>
+                        <image class='big-image' mode="widthFix" src="{{item}}"></image>
                     </view>
                 </swiper-item>
             </block>

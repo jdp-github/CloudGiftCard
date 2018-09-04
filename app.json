@@ -1,42 +1,45 @@
 {
-    "pages": [
-        "pages/login/login",
-        "pages/index/index",
-        "pages/gift/gift",
-        "pages/history/history",
-        "pages/customserv/customserv",
-        "pages/bannerimg/bannerimg"
-    ],
-    "window": {
-        "backgroundColor": "#F6F6F6",
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#F6F6F6",
-        "navigationBarTitleText": "礼道",
-        "navigationBarTextStyle": "black"
-    },
-    "tabBar": {
-        "list": [
-            {
-                "pagePath": "pages/index/index",
-                "text": "首页",
-                "selectedColor": "#cc3333",
-                "iconPath": "images/home_normal.png",
-                "selectedIconPath": "images/home_selected.png"
-            },
-            {
-                "pagePath": "pages/history/history",
-                "text": "礼物记录",
-                "selectedColor": "#cc3333",
-                "iconPath": "images/history_normal.png",
-                "selectedIconPath": "images/history_selected.png"
-            },
-            {
-                "pagePath": "pages/customserv/customserv",
-                "text": "联系我",
-                "selectedColor": "#cc3333",
-                "iconPath": "images/contact_normal.png",
-                "selectedIconPath": "images/contact_selected.png"
-            }
-        ]
-    }
+	"pages": [
+		"pages/login/login",
+		"pages/index/index",
+		"pages/gift/gift",
+		"pages/history/history",
+		"pages/customserv/customserv",
+		"pages/bannerimg/bannerimg"
+	],
+	"window": {
+		"backgroundColor": "#F6F6F6",
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#F6F6F6",
+		"navigationBarTitleText": "礼道心选",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"color": "#999999",
+				"selectedColor": "#f0f",
+				"iconPath": "images/home_normal.png",
+				"selectedIconPath": "images/home_selected.png"
+			},
+			{
+				"pagePath": "pages/history/history",
+				"text": "礼物记录",
+				"color": "#999999",
+				"selectedColor": "#f00",
+				"iconPath": "images/history_normal.png",
+				"selectedIconPath": "images/history_selected.png"
+			},
+			{
+				"pagePath": "pages/customserv/customserv",
+				"text": "联系我",
+				"color": "#999999",
+				"selectedColor": "#cc3333",
+				"iconPath": "images/contact_normal.png",
+				"selectedIconPath": "images/contact_selected.png"
+			}
+		]
+	}
 }

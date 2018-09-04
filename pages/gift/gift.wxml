@@ -3,13 +3,13 @@
 
     <!-- 大图 -->
     <view class='image-container'>
-        <image class='big-img' mode='aspectFit' src='{{selectedCard.spec.logo}}'></image>
+        <image class='big-img' mode='widthFix' src='{{selectedCard.spec.logo}}'></image>
     </view>
 
     <!-- 推荐 -->
     <scroll-view scroll-x class='products-recommend-container'>
         <view wx:for='{{cardList}}' wx:key='{{item.index}}' class="{{item.isChecked?'products-recommend-img-container-check':'products-recommend-img-container-normal'}}">
-            <image class='products-recommend-img' id='{{item.index}}' mode='aspectFit' src="{{item.spec.logo}}" bindtap='onImageClick' data-selectedcard='{{item}}'>
+            <image class='products-recommend-img' id='{{item.index}}' mode='widthFix' src="{{item.spec.logo}}" bindtap='onImageClick' data-selectedcard='{{item}}'>
             </image>
             <view hidden='{{!item.isChecked}}' style="position:absolute;right:0rpx;top:-2rpx;" class="products-recommend-check fa fa-check-square"></view>
         </view>
@@ -25,7 +25,7 @@
         <view class='products-item-container'>
 
             <!-- 图片 -->
-            <image class='products-item-img' mode='aspectFit' src='{{item.spec.logo}}' data-item='{{item}}' bindtap='onItemClick'></image>
+            <image class='products-item-img' mode='widthFix' src='{{item.spec.logo}}' data-item='{{item}}' bindtap='onItemClick'></image>
 
             <!-- 文字  -->
             <view class='products-item-txt'>
