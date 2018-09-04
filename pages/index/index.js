@@ -33,10 +33,10 @@ Page({
                 self.setData({
                     imgSrc: self.data.imgSrc
                 })
-                // console.log(self.data.imgSrc)
+                console.log("请求成功")
             },
             fail: function(res) {
-
+                console.log("请求失败：" + JSON.stringify(res))
             }
         })
         // 卡片

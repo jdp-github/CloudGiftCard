@@ -36,6 +36,7 @@
     border: 1rpx solid #c33;
     border-radius: 10rpx;
     display: inline-block;
+    height: 120rpx;
     position: relative;
     margin-left: 10rpx;
     margin-right: 10rpx;
@@ -44,9 +45,10 @@
 
 .products-recommend-img {
     width: 200rpx;
+    height: 100rpx;
     /* margin-left: -11rpx; */
     border-radius: 10rpx;
-    margin-bottom: -5rpx;
+    /* margin-bottom: -5rpx; */
 }
 
 .products-recommend-check {
@@ -57,6 +59,7 @@
 .txt-title-container {
     width: 100%;
     margin-top: 20rpx;
+    height: 60rpx;
 }
 
 .txt-title {
@@ -64,32 +67,40 @@
 }
 
 .products-container {
-    display: flex;
+    display: -webkit-box;
     display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     flex-flow: column nowrap;
-    height: 100%;
+    height: 180rpx;
     width: 100%;
 }
 
 .products-item-container {
-    display: flex;
+    display: -webkit-box;
     display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     flex-flow: row nowrap;
     align-items: center;
     padding-left: 20rpx;
     padding-right: 20rpx;
+    height: 180rpx;
 }
 
 .products-item-img {
     width: 200rpx;
+    height: 100rpx;
     border-radius: 10rpx;
     margin-top: 10rpx;
     margin-bottom: 10rpx;
 }
 
 .products-item-txt {
-    display: flex;
+    display: -webkit-box;
     display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     flex-flow: column nowrap;
     align-content: center;
     justify-content: center;
@@ -102,16 +113,20 @@
 }
 
 .products-item-icon-container {
-    display: flex;
+    display: -webkit-box;
     display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     flex-grow: 2;
     flex-direction: row;
     justify-content: flex-end;
 }
 
 .products-item-hidden-container {
-    display: flex;
+    display: -webkit-box;
     display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     flex-flow: row nowrap;
     align-items: center;
 }
@@ -140,8 +155,10 @@
 .footer-container {
     width: 100%;
     height: 120rpx;
-    display: flex;
+    display: -webkit-box;
     display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     flex-direction: column;
     position: fixed;
     bottom: 0;
@@ -149,8 +166,10 @@
 }
 
 .footer-item-contanier {
-    display: flex;
+    display: -webkit-box;
     display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     height: 100%;
     flex-direction: row;
     align-items: center;
