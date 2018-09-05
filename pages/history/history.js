@@ -9,6 +9,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        receivedOpenid: '',
         isSend: false,
         sentList: [],
         receivedList: [],
@@ -22,9 +23,10 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面加载
+     * 生命周期函数--监听页面显示
      */
     onLoad: function(options) {
+        console.log('onLoad')
         var that = this;
         wx.login({
             success: function(res) {
@@ -34,22 +36,32 @@ Page({
                     url: "https://www.lytall.com/v1/wxopenid/" + res.code,
                     success: function(res) {
                         var receivedOpenid = JSON.parse(res.data.data).openid;
-                        console.log('receivedOpenid:' + receivedOpenid + 'openid:' + options.openid)
+                        that.setData({
+                            receivedOpenid: receivedOpenid
+                        })
                         if (!that.isEmptyObject(options) && receivedOpenid != options.openid) {
                             that.setData({
                                 showReceiveTip: true
                             })
                             that.updateOrder(options.orderId, receivedOpenid, options.openid);
                         } else {
-                            wx.showLoading({
-                                mask: true
-                            })
-                            that.requestHistoryList(receivedOpenid);
+							that.onShow();
                         }
                     }
                 })
             }
         });
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function() {
+        console.log('onShow')
+		wx.showLoading({
+			mask: true
+		})
+        this.requestHistoryList(this.data.receivedOpenid);
     },
 
     receiveTipOK: function(e) {
@@ -75,7 +87,8 @@ Page({
                 openid: openid
             },
             success(res) {
-                that.requestHistoryList(receivedOpenid);
+                // that.requestHistoryList(receivedOpenid);
+				that.onShow();
             },
             fail(res) {
                 wx.hideLoading();
@@ -131,7 +144,6 @@ Page({
                         that.data.sentList[k] = item;
                         k++;
                     }
-                    console.log(item)
                 }
                 // console.log('送出：' + JSON.stringify(that.data.sentList))
                 // console.log('收到：' + JSON.stringify(that.data.receivedList))
@@ -379,17 +391,10 @@ Page({
     },
 
     /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
-    },
-
-    /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function() {
-
+        console.log('onHide')
     },
 
     /**

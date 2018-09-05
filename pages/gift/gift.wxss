@@ -220,6 +220,7 @@
     display: flex;
     display: -webkit-flex;
     flex-direction: column;
+    top: 0rpx;
 }
 
 .dialog-title-container {
@@ -242,6 +243,7 @@
     border-radius: 15rpx;
     margin-left: 50rpx;
     z-index: 1003;
+    position: relative;
 }
 
 .dialog-title {
@@ -287,7 +289,7 @@
     display: flex;
     flex-direction: column;
     background: #fff;
-	border-radius: 10rpx;
+    border-radius: 10rpx;
 }
 
 .share-title {
