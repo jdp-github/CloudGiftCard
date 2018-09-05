@@ -16,6 +16,7 @@ Page({
         address: {},
         card: {},
         showShare: false,
+        showReceiveTip: false
         // 未送出 已送出 已领取 未领取
         // unsent sent  unreceived  received
     },
@@ -24,10 +25,6 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log('onload' + options)
-        wx.showLoading({
-            mask: true
-        })
         var that = this;
         wx.login({
             success: function(res) {
@@ -37,17 +34,29 @@ Page({
                     url: "https://www.lytall.com/v1/wxopenid/" + res.code,
                     success: function(res) {
                         var receivedOpenid = JSON.parse(res.data.data).openid;
-                        // console.log(receivedOpenid)
-                        if (that.isEmptyObject(options)) {
-                            that.requestHistoryList(receivedOpenid);
-                        } else {
-                            console.log('receivedOpenid:' + receivedOpenid + '    openid:' + options.openid)
+                        console.log('receivedOpenid:' + receivedOpenid + 'openid:' + options.openid)
+                        if (!that.isEmptyObject(options) && receivedOpenid != options.openid) {
+                            that.setData({
+                                showReceiveTip: true
+                            })
                             that.updateOrder(options.orderId, receivedOpenid, options.openid);
+                        } else {
+                            wx.showLoading({
+                                mask: true
+                            })
+                            that.requestHistoryList(receivedOpenid);
                         }
                     }
                 })
             }
         });
+    },
+
+    receiveTipOK: function(e) {
+        wx.hideLoading();
+        this.setData({
+            showReceiveTip: false
+        })
     },
 
     updateOrder: function(orderId, receivedOpenid, openid) {
@@ -100,15 +109,15 @@ Page({
                     } else if (process == 'sent') {
                         item.spec.order.status.text = '已送出';
                         item.spec.order.status.clickable = false;
-						item.spec.order.status.showSelfReceive = false;
+                        item.spec.order.status.showSelfReceive = false;
                     } else if (process == 'received') {
                         item.spec.order.status.text = '已领取';
                         item.spec.order.status.clickable = false;
-						item.spec.order.status.showSelfReceive = false;
+                        item.spec.order.status.showSelfReceive = false;
                     } else if (process == 'unreceived') {
                         item.spec.order.status.text = '未领取';
                         item.spec.order.status.clickable = true;
-						item.spec.order.status.showSelfReceive = false;
+                        item.spec.order.status.showSelfReceive = false;
                     }
 
                     if (item.spec.order.spec.receivedOpenID == openid) { // 我收到的

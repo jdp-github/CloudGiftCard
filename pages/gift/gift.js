@@ -111,7 +111,7 @@ Page({
         })
 
         setTimeout(function() {
-            animation.opacity(1).translateY(200).step();
+            animation.opacity(1).translateY(100).step();
             this.setData({
                 animationData: animation
             })

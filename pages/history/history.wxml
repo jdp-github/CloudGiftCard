@@ -46,7 +46,7 @@
     </view>
 
     <!-- 转发 -->
-    <view class='mask' wx:if="{{showShare}}" bindtap='onShareDialogClick'></view>
+    <view class='mask' wx:if="{{showShare || showReceiveTip}}" bindtap='onShareDialogClick'></view>
     <view class='share-container' wx:if="{{showShare}}">
         <view class='share-title'>
             <view>发送给朋友</view>
@@ -56,6 +56,16 @@
             <button class='share-btn share-btn-ok' open-type='share' bindtap='shareOK'>确定</button>
             <view class='vertical-line'></view>
             <button class='share-btn' bindtap='shareCancle'>取消</button>
+        </view>
+    </view>
+
+    <view class='share-container' wx:if="{{showReceiveTip}}">
+        <view class='receive-tip-title '>
+            <view>您收到一份礼物，请尽快领取</view>
+        </view>
+        <view class='share-line'></view>
+        <view class='share-btn-container'>
+            <button class='share-btn' bindtap='receiveTipOK'>确定</button>
         </view>
     </view>
 </view>
