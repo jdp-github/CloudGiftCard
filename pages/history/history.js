@@ -45,7 +45,8 @@ Page({
                             })
                             that.updateOrder(options.orderId, receivedOpenid, options.openid);
                         } else {
-							that.onShow();
+                            console.log('that.onShow')
+                            that.onShow();
                         }
                     }
                 })
@@ -58,10 +59,13 @@ Page({
      */
     onShow: function() {
         console.log('onShow')
-		wx.showLoading({
-			mask: true
-		})
-        this.requestHistoryList(this.data.receivedOpenid);
+        wx.showLoading({
+            mask: true
+        })
+		// debugger
+        if (this.data.receivedOpenid != null && this.data.receivedOpenid != '') {
+            this.requestHistoryList(this.data.receivedOpenid);
+        }
     },
 
     receiveTipOK: function(e) {
@@ -88,7 +92,7 @@ Page({
             },
             success(res) {
                 // that.requestHistoryList(receivedOpenid);
-				that.onShow();
+                that.onShow();
             },
             fail(res) {
                 wx.hideLoading();
@@ -116,7 +120,7 @@ Page({
                     }
                     var process = item.spec.order.status.process;
                     if (process == 'unsent') {
-                        item.spec.order.status.text = '未送出';
+                        item.spec.order.status.text = '点此送出';
                         item.spec.order.status.clickable = true;
                         item.spec.order.status.showSelfReceive = true;
                     } else if (process == 'sent') {
@@ -128,7 +132,7 @@ Page({
                         item.spec.order.status.clickable = false;
                         item.spec.order.status.showSelfReceive = false;
                     } else if (process == 'unreceived') {
-                        item.spec.order.status.text = '未领取';
+                        item.spec.order.status.text = '点此领取';
                         item.spec.order.status.clickable = true;
                         item.spec.order.status.showSelfReceive = false;
                     }

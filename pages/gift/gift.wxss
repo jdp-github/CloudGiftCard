@@ -33,7 +33,7 @@
 }
 
 .products-recommend-img-container-check {
-    border: 1rpx solid #c33;
+    border: 1rpx solid #ff3333;
     border-radius: 10rpx;
     display: inline-block;
     height: 120rpx;
@@ -52,7 +52,7 @@
 }
 
 .products-recommend-check {
-    color: #c33;
+    color: #ff3333;
     font-size: 40rpx;
 }
 
@@ -136,7 +136,7 @@
 }
 
 .products-item-icon-color {
-    color: red;
+    color: #ff3333;
 }
 
 .products-item-input {
@@ -193,7 +193,14 @@
     width: 27%;
     margin-right: 30rpx;
     bottom: 20rpx;
-    border: 1rpx solid lightgray;
+    border: 1rpx solid #bdbdbd;
+    color: #bdbdbd;
+    border-radius: 200rpx;
+}
+
+.purchase-btn-able {
+    color: white;
+    background: #f33;
 }
 
 .purchase-btn text {
@@ -324,7 +331,7 @@
 }
 
 .share-btn-ok {
-    color: #c33;
+    color: #ff3333;
 }
 
 .vertical-line {

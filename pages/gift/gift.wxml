@@ -57,11 +57,11 @@
         <view class='footer-item-contanier'>
             <!-- 左边文字 -->
             <view class='footer-left'>
-                <view style='color:#7C7C7C;font-size:30rpx'>{{productCount}}份礼品</view>
+                <view style='color:#bdbdbd;font-size:30rpx'>{{productCount}}份礼品</view>
                 <view>¥{{totalPrice}}</view>
             </view>
             <!-- 按钮 -->
-            <button class='purchase-btn' disabled='{{!canBuy}}' bindtap='buy'>购买</button>
+            <button class="{{canBuy?'purchase-btn-able purchase-btn':'purchase-btn'}}" disabled='{{!canBuy}}' bindtap='buy'>购买</button>
         </view>
     </view>
 

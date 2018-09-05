@@ -22,11 +22,11 @@
 .header-txt-check {
     font-size: 30rpx;
     margin-top: 15rpx;
-    color: red;
+    color: #f33;
 }
 
 .header-line {
-    background: red;
+    background: #f33;
     width: 80rpx;
     height: 4rpx;
     margin-top: 15rpx;
@@ -59,7 +59,7 @@
     display: flex;
     flex-direction: row;
     font-size: 30rpx;
-    color: #999;
+    color: #bdbdbd;
     margin-top: 10rpx;
 }
 
@@ -105,7 +105,7 @@
 
 .body-gift-text {
     font-size: 30rpx;
-    color: #999;
+    color: #bdbdbd;
     margin-left: 50rpx;
 }
 
@@ -135,9 +135,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1rpx solid red;
-    color: red;
-    background: white;
+    color: white;
+    background: #f33;
+    border-radius: 50rpx;
+}
+
+.self-receive-btn {
+    margin-left: 80rpx;
 }
 
 .bottom-btn {
@@ -150,12 +154,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #999;
+    color: #bdbdbd;
+    border: 1rpx solid #bdbdbd;
+    background: white;
+    border-radius: 50rpx;
 }
 
 .bottom-text {
     font-size: 30rpx;
-    color: #999;
+    color: #bdbdbd;
     margin-left: 0rpx;
 }
 
@@ -226,7 +233,7 @@
 }
 
 .share-btn-ok {
-    color: #c33;
+    color: #f33;
 }
 
 .receive-tip-title {
@@ -236,7 +243,7 @@
     justify-content: center;
     align-items: center;
     font-size: 40rpx;
-    color: #c33;
+    color: #f33;
 }
 
 button::after {

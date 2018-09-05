@@ -23,7 +23,7 @@
             <view class='title-line'></view>
             <!-- 内容 -->
             <view class='content-item-body' wx:for='{{item.spec.order.spec.goods}}' wx:key='{{item.metadata.uid}}'>
-                <image class='body-gift-img' mode='scaleToFill' src='{{item.spec.logo}}'></image>
+                <image class='body-gift-img' mode='widthFix' src='{{item.spec.logo}}'></image>
                 <view class='body-text-container'>
                     <text class='body-gift-name'>{{item.metadata.description}}</text>
                     <view class='body-desc-container'>
@@ -37,7 +37,7 @@
             <!-- 底 -->
             <view class='content-item-footer'>
                 <view class='bottom-text'>{{item.spec.order.status.leftText}}</view>
-                <view class='bottom-clickable-btn' data-item='{{item}}' hidden='{{!item.spec.order.status.showSelfReceive}}' bindtap='onSelfReceive'>自己领取</view>
+                <view class='self-receive-btn  bottom-clickable-btn' data-item='{{item}}' hidden='{{!item.spec.order.status.showSelfReceive}}' bindtap='onSelfReceive'>自己领取</view>
                 <view class="{{item.spec.order.status.clickable?'bottom-clickable-btn':'bottom-btn'}}" data-item='{{item}}' bindtap='onItemClick'>{{item.spec.order.status.text}}</view>
             </view>
             <!-- 隔断 -->
