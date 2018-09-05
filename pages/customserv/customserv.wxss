@@ -5,6 +5,11 @@
     height: 100%;
     box-sizing: border-box;
     background: #f7f7f7;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: middle;
+    margin: auto;
 }
 
 .img-background {
@@ -13,7 +18,10 @@
 }
 
 .contact-btn {
-    position: fixed;
-    top: 10rpx;
-	z-index: 1001;
+    position: absolute;
+    margin: auto;
+    float: left;
+    top: 200rpx;
+    background: #ff6;
+    color: #3567cb;
 }

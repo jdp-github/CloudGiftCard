@@ -1,5 +1,5 @@
 <!--pages/customserv/customserv.wxml-->
 <view class='contact-container'>
-    <button open-type='contact'>联系在线客服</button>
+    <button class='contact-btn' open-type='contact'>联系在线客服</button>
     <image class='img-background' src='../../images/contact_bg.png' mode='widthFix'></image>
 </view>
