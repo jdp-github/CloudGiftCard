@@ -33,7 +33,7 @@
 }
 
 .products-recommend-img-container-check {
-    border: 1rpx solid #ff3333;
+    border: 1rpx solid #f33;
     border-radius: 10rpx;
     display: inline-block;
     height: 120rpx;
@@ -52,7 +52,7 @@
 }
 
 .products-recommend-check {
-    color: #ff3333;
+    color: #f33;
     font-size: 40rpx;
 }
 
@@ -63,7 +63,9 @@
 }
 
 .txt-title {
+    font-size: 35rpx;
     padding-left: 20rpx;
+    color: #333;
 }
 
 .products-container {
@@ -136,7 +138,7 @@
 }
 
 .products-item-icon-color {
-    color: #ff3333;
+    color: #f33;
 }
 
 .products-item-input {
@@ -297,7 +299,7 @@
     flex-direction: column;
     background: #fff;
     border-radius: 10rpx;
-	left: 50%;
+    left: 50%;
     margin-left: -40%;
 }
 
@@ -333,7 +335,7 @@
 }
 
 .share-btn-ok {
-    color: #ff3333;
+    color: #f33;
 }
 
 .vertical-line {

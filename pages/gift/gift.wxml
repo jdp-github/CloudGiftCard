@@ -16,7 +16,7 @@
     </scroll-view>
 
     <view class='txt-title-container'>
-        <view class='txt-title'>选择商品</view>
+        <view class='txt-title'>第二步 选择中秋礼盒</view>
     </view>
 
     <!-- 列表 -->

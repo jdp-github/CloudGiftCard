@@ -309,8 +309,8 @@ Page({
                 var out_trade_no = that.getWxPayOrdrID(); // 商户订单号
                 var spbill_create_ip = '127.0.0.1'; //ip
                 // var total_fee = parseInt(that.data.wxPayMoney) * 100;
-                // var total_fee = that.data.totalPrice * 100;
-                var total_fee = 1;
+                var total_fee = that.data.totalPrice * 100;
+                // var total_fee = 1;
                 var trade_type = "JSAPI";
                 var key = 'xiAofAnguAnApimiyAo18lidAo18guAn';
                 // debugger

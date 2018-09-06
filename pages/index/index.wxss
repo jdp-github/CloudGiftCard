@@ -109,9 +109,10 @@ image {
 }
 
 .second-section-title {
-    font-size: 28rpx;
-    padding-left: 30rpx;
+    font-size: 35rpx;
+    padding-left: 35rpx;
     padding-right: 30rpx;
+	color: #333333;
 }
 
 .block-row {

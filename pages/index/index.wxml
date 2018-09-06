@@ -11,7 +11,9 @@
             </block>
         </swiper>
     </view>
-	
+
+    <view class='second-section-title'>第一步 选择祝福卡片</view>
+
     <view class="block-row" wx:for="{{dataList}}" wx:key="{{item.index}}">
         <view class="block-item" wx:for="{{item}}" wx:key="{{item.index}}">
             <view class="block-frame">
