@@ -26,7 +26,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onLoad: function(options) {
-        console.log('onLoad')
+        // console.log('onLoad')
         var that = this;
         wx.login({
             success: function(res) {
@@ -40,12 +40,9 @@ Page({
                             receivedOpenid: receivedOpenid
                         })
                         if (!that.isEmptyObject(options) && receivedOpenid != options.openid) {
-                            that.setData({
-                                showReceiveTip: true
-                            })
                             that.updateOrder(options.orderId, receivedOpenid, options.openid);
                         } else {
-                            console.log('that.onShow')
+                            // console.log('that.onShow')
                             that.onShow();
                         }
                     }
@@ -58,11 +55,11 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        console.log('onShow')
+        // console.log('onShow')
         wx.showLoading({
             mask: true
         })
-		// debugger
+        // debugger
         if (this.data.receivedOpenid != null && this.data.receivedOpenid != '') {
             this.requestHistoryList(this.data.receivedOpenid);
         }
@@ -91,7 +88,11 @@ Page({
                 openid: openid
             },
             success(res) {
-                // that.requestHistoryList(receivedOpenid);
+                if (res.data.status == 200) {
+                    that.setData({
+                        showReceiveTip: true
+                    })
+                }
                 that.onShow();
             },
             fail(res) {
@@ -102,6 +103,7 @@ Page({
 
     // 历史记录
     requestHistoryList: function(openid) {
+        // console.log(openid)
         var that = this;
         wx.request({
             url: 'https://www.lytall.com/v1/histories',
@@ -109,12 +111,14 @@ Page({
                 openid: openid
             },
             success(res) {
-                // debugger
                 var resObj = JSON.parse(res.data.data);
+                // console.log(JSON.stringify(resObj))
                 for (var i = 0, j = 0, k = 0, len = resObj.kvs.length; i < len; i++) {
                     var itemObj = resObj.kvs[i];
+                    // debugger
                     var item = JSON.parse(base64.decode(itemObj.value))
-                    // console.log(base64.decode(itemObj.value))
+                    // debugger
+                    // console.log(JSON.stringify(item))
                     if (i == 0) {
                         that.requestCard(item.spec.order.spec.goods[i].spec.cardUID);
                     }
@@ -168,6 +172,7 @@ Page({
 
     // 获取卡片的title和img
     requestCard: function(cardUid) {
+        // debugger
         var that = this
         wx.request({
             url: 'https://www.lytall.com/v1/card',
@@ -205,7 +210,7 @@ Page({
         this.setData({
             order: item
         })
-        console.log(this.data.order)
+        // console.log(this.data.order)
         var process = item.spec.order.status.process;
         if (process == 'unsent') { // 未送出
             this.setData({
@@ -287,7 +292,7 @@ Page({
             method: 'PUT',
             data: that.makeOrderParam(process),
             success: function(res) {
-                // console.log("成功" + res)
+                // console.log("更新订单:" + res)
                 that.onLoad();
             },
             fail: function(res) {
@@ -327,7 +332,7 @@ Page({
             param.spec.consignee = address.userName
         }
 
-        console.log(JSON.stringify(param));
+        // console.log(JSON.stringify(param));
         return JSON.stringify(param);
     },
 
@@ -345,12 +350,14 @@ Page({
     onShareAppMessage: function(res) {
         // 来自页面内转发按钮
         var that = this;
+        // console.log(JSON.stringify(this.data.order))
         if (res.from === 'button') {
             return {
                 title: this.data.card.metadata.description,
-                path: '/pages/history/history?orderId=' + this.data.order.metadata.name + '&openid=' + this.data.order.spec.wxOrder.openid,
+                path: '/pages/history/history?orderId=' + this.data.order.metadata.name + '&openid=' + this.data.order.spec.openID,
                 imageUrl: this.data.card.spec.logo,
                 success: function(res) {
+                    // console.log('分享成功')
                     that.insertOrUpdateOrder('sent');
                 },
                 fail: function(res) {
@@ -398,7 +405,7 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function() {
-        console.log('onHide')
+        // console.log('onHide')
     },
 
     /**

@@ -21,9 +21,10 @@
     width: 70%;
     position: absolute;
     margin: auto;
-    float: left;
     bottom: 180rpx;
     background: #f33;
     color: white;
     border-radius: 50rpx;
+    left: 50%;
+    margin-left: -35%;
 }

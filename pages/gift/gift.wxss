@@ -297,6 +297,8 @@
     flex-direction: column;
     background: #fff;
     border-radius: 10rpx;
+	left: 50%;
+    margin-left: -40%;
 }
 
 .share-title {
