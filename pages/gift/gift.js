@@ -1,5 +1,6 @@
 // pages/card/card.js
-var base64 = require('../../utils/base64.js');
+// var base64 = require('../../utils/base64.js');
+var bas64Util = require('../../utils/base64.min.js').Base64
 var minMD5 = require('../../utils/minMD5.js');
 var RSA = require('../../utils/wxapp_rsa.js')
 var key = require('../../key/id_rsa.js');
@@ -57,8 +58,8 @@ Page({
                 var resObj = JSON.parse(res.data.data);
                 for (var i = 0, len = resObj.kvs.length; i < len; i++) {
                     var itemObj = resObj.kvs[i];
-                    // console.log(base64.decode(itemObj.value))
-                    var item = self.data.productList[i] = JSON.parse(base64.decode(itemObj.value));
+                    // console.log(bas64Util.decode(itemObj.value))
+					var item = self.data.productList[i] = JSON.parse(bas64Util.decode(itemObj.value));
                     item.index = i;
                     item.spec.price = parseInt(item.spec.price);
                     item.spec.count = 0;
@@ -309,8 +310,8 @@ Page({
                 var out_trade_no = that.getWxPayOrdrID(); // 商户订单号
                 var spbill_create_ip = '127.0.0.1'; //ip
                 // var total_fee = parseInt(that.data.wxPayMoney) * 100;
-                var total_fee = that.data.totalPrice * 100;
-                // var total_fee = 1;
+                // var total_fee = that.data.totalPrice * 100;
+                var total_fee = 1;
                 var trade_type = "JSAPI";
                 var key = 'xiAofAnguAnApimiyAo18lidAo18guAn';
                 // debugger

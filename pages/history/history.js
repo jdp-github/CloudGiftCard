@@ -1,8 +1,8 @@
 // pages/history/history.js
-var base64 = require('../../utils/base64.js');
+// var base64 = require('../../utils/base64.js');
 var RSA = require('../../utils/wxapp_rsa.js');
 var key = require('../../key/id_rsa.js');
-
+var bas64Util = require('../../utils/base64.min.js').Base64
 Page({
 
     /**
@@ -116,7 +116,7 @@ Page({
                 for (var i = 0, j = 0, k = 0, len = resObj.kvs.length; i < len; i++) {
                     var itemObj = resObj.kvs[i];
                     // debugger
-                    var item = JSON.parse(base64.decode(itemObj.value))
+					var item = JSON.parse(bas64Util.decode(itemObj.value))
                     // debugger
                     // console.log(JSON.stringify(item))
                     if (i == 0) {
@@ -181,7 +181,7 @@ Page({
             },
             success(res) {
                 var resObj = JSON.parse(res.data.data);
-                that.data.card = JSON.parse(base64.decode(resObj.kvs[0].value));
+				that.data.card = JSON.parse(bas64Util.decode(resObj.kvs[0].value));
                 // console.log(that.data.card)
                 that.setData({
                     card: that.data.card

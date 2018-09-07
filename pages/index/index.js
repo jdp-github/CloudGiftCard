@@ -1,11 +1,8 @@
-
-
-
-
 //index.js
 //获取应用实例
 const app = getApp();
-var base64 = require('../../utils/base64.js');
+// var base64 = require('../../utils/base64.js');
+var bas64Util = require('../../utils/base64.min.js').Base64
 
 Page({
     data: {
@@ -28,8 +25,8 @@ Page({
                 var resObj = JSON.parse(res.data.data);
                 for (var i = 0, len = resObj.kvs.length; i < len; i++) {
                     var itemObj = resObj.kvs[i];
-                    var item = JSON.parse(base64.decode(itemObj.value));
-                    // console.log(base64.decode(itemObj.value))
+					var item = JSON.parse(bas64Util.decode(itemObj.value));
+                    // console.log(bas64Util.decode(itemObj.value))
                     for (var j = 0, lenj = item.cards.length; j < lenj; j++) {
                         self.data.imgSrc[j] = item.cards[j].spec;
                     }
@@ -55,8 +52,8 @@ Page({
                 var rowList = [];
                 for (var i = 0, len = resObj.kvs.length - 2, j = 0; i < len; i++) {
                     var itemBase64 = resObj.kvs[i];
-                    var item = JSON.parse(base64.decode(itemBase64.value));
-                    // console.log(base64.decode(itemBase64.value))
+					var item = JSON.parse(bas64Util.decode(itemBase64.value));
+                    // console.log(bas64Util.decode(itemBase64.value))
                     item.index = i;
 
                     self.data.cardList[i] = item;
