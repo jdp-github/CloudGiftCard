@@ -55,7 +55,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        // console.log('onShow')
         wx.showLoading({
             mask: true
         })
@@ -112,13 +111,12 @@ Page({
             },
             success(res) {
                 var resObj = JSON.parse(res.data.data);
-                // console.log(JSON.stringify(resObj))
                 for (var i = 0, j = 0, k = 0, len = resObj.kvs.length; i < len; i++) {
                     var itemObj = resObj.kvs[i];
                     // debugger
 					var item = JSON.parse(bas64Util.decode(itemObj.value))
                     // debugger
-                    // console.log(JSON.stringify(item))
+                    console.log(JSON.stringify(item))
                     if (i == 0) {
                         that.requestCard(item.spec.order.spec.goods[i].spec.cardUID);
                     }
@@ -353,7 +351,7 @@ Page({
         // console.log(JSON.stringify(this.data.order))
         if (res.from === 'button') {
             return {
-                title: this.data.card.metadata.description,
+				title: '我给你送了一份中秋礼物，请点击领取吧！',
                 path: '/pages/history/history?orderId=' + this.data.order.metadata.name + '&openid=' + this.data.order.spec.openID,
                 imageUrl: this.data.card.spec.logo,
                 success: function(res) {
@@ -368,7 +366,7 @@ Page({
             }
         } else {
             return {
-                title: '礼道心选',
+				title: '微信送礼，一秒送达，快来体验吧！',
                 path: '/pages/index/index'
             }
         }

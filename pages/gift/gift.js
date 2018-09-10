@@ -239,7 +239,7 @@ Page({
         var that = this;
         if (res.from === 'button') {
             return {
-                title: this.data.title,
+				title: '我给你送了一份中秋礼物，请点击领取吧！',
                 path: '/pages/history/history?orderId=' + this.data.wxOrder.out_trade_no + '&openid=' + this.data.wxOrder.openid,
                 imageUrl: this.data.selectedCard.spec.logo,
                 success: function(res) {
@@ -253,7 +253,7 @@ Page({
             }
         } else {
             return {
-                title: '礼道心选',
+				title: '微信送礼，一秒送达，快来体验吧！',
                 path: '/pages/index/index'
             }
         }
@@ -310,8 +310,8 @@ Page({
                 var out_trade_no = that.getWxPayOrdrID(); // 商户订单号
                 var spbill_create_ip = '127.0.0.1'; //ip
                 // var total_fee = parseInt(that.data.wxPayMoney) * 100;
-                var total_fee = that.data.totalPrice * 100;
-                // var total_fee = 1;
+                // var total_fee = that.data.totalPrice * 100;
+                var total_fee = 1;
                 var trade_type = "JSAPI";
                 var key = 'xiAofAnguAnApimiyAo18lidAo18guAn';
                 // debugger

@@ -86,7 +86,7 @@ Page({
             // console.log(res.target)
         }
         return {
-            title: '礼道心选',
+			title: '微信送礼，一秒送达，快来体验吧！',
             path: 'pages/index/index',
             success: function(res) {
                 // 转发成功

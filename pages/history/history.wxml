@@ -19,6 +19,8 @@
         <view class='content-item-container' wx:for='{{isSend ? sentList : receivedList}}' wx:key='{{item.metadata.uid}}'>
             <!-- title -->
             <view class='content-item-title'>订单号：{{item.metadata.name}}</view>
+			<!-- 快递 -->
+			<view class='content-item-title' hidden="{{item.spec.order.spec.expressNo == ''}}">{{item.spec.order.spec.expressCompany}}：{{item.spec.order.spec.expressNo}}</view>
             <!-- 线 -->
             <view class='title-line'></view>
             <!-- 内容 -->

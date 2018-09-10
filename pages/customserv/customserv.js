@@ -61,6 +61,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+	  if (res.from === 'button') {
+		  
+	  } else {
+		  return {
+			  title: '微信送礼，一秒送达，快来体验吧！',
+			  path: '/pages/index/index'
+		  }
+	  }
   }
 })
